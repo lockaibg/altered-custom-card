@@ -43,6 +43,11 @@ function updateCardType(value, img) {
     img.style.left = `-${coordinates.row_coordinates}px`;
     document.getElementById("preview-type").innerHTML = value;
 }
+//fonction pour update les stats de la carte
+function updateStats(stat, type) {
+    var stat_preview = document.getElementById(`preview-${type}`);
+    stat_preview.innerHTML = stat;
+}
 
 function updateFaction(img, faction) {
     img.src = `images/${faction}.webp`;
