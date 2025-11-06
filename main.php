@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     <title>Creating...</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jali+Greek:opsz,wght@8..144,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
     <!--script pour mettre a jour le formulaire-->
     <script src="js/update_form.js"></script>
     <!--script pour mettre a jour la preview du document-->
@@ -69,14 +73,20 @@
         </form>
     </div>
     <div id="card-preview">
-        <div class="back-card"><img href="Card background" src ="images/OR.webp" id="card-background"></div>
-        <div class="card-illustration"><img href="" src="" id="preview-illustration"></span></div>
+        <div class="card-illustration">
+            <img alt="Illustration" src="images/test.png" id="preview-illustration">
+        </div>
+
+        <div class="back-card">
+            <img alt="Card frame" src="images/ordis.webp" id="card-background">
+        </div>
+
         <div class="card-content">
-            <div class="card-name"><span id="preview-name"></span></div>
-            <div class="card-effect"><span id="preview-effect"></span></div>
-            <div class="card-type"><span id="preview-type"></span></div>
-            <div class="card-hand-cost"><span id="preview-hand-cost">0</span></div>
-            <div class="card-reserve-cost"><span id="preview-reserve-cost">0</span></div>
+            <div class="card-name"><span id="preview-name">Nom de la carte</span></div>
+            <div class="card-effect"><span id="preview-effect">Texte d’effet</span></div>
+            <div class="card-type"><span id="preview-type">Type</span></div>
+            <div class="card-hand-cost"><span id="preview-hand-cost">1</span></div>
+            <div class="card-reserve-cost"><span id="preview-reserve-cost">1</span></div>
             <div class="card-earth"><span id="preview-earth">0</span></div>
             <div class="card-leaf"><span id="preview-leaf">0</span></div>
             <div class="card-ocean"><span id="preview-ocean">0</span></div>
