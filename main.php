@@ -13,16 +13,13 @@
     <script src="js/update_form.js"></script>
     <!--script pour mettre a jour la preview du document-->
     <script src="js/update_preview.js"></script>
-
-    <script src="js/update_css.js"></script>
-
 </head>
 <body>
   <div id="form">
     <form>
 
       <div class="field span-2">
-        <input type="text" id="name" name="name" placeholder="Card Name"/>
+        <input type="text" id="name" name="name" placeholder="Card name"/>
       </div>
 
       <div class="field">
@@ -65,15 +62,15 @@
         <label for="card-image">Illustration :</label>
         <input type="file" id="card-image" name="card-image" accept="image/*" />
       </div>
-
+        <br/>
       <div class="field span-2">
         <textarea id="card-effect" name="card-effect" placeholder="Effect"></textarea>
       </div>
-
+        <br/>
       <div class="field span-2">
         <textarea id="card-lore" name="card-lore" placeholder="Lore"></textarea>
       </div>
-
+        <br/>
       <div class="field span-2" id="card-bonus-div">
         <textarea id="card-bonus" name="card-bonus" placeholder="Reserve effect"></textarea>
       </div>
