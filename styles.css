@@ -2,7 +2,17 @@
 
 
 body {
-     font-family: "Jali Greek Variable", "Jali Greek", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Jali Greek Variable", "Jali Greek", sans-serif;
+    margin:0;
+    background: radial-gradient(1200px 800px at 20% -10%, #1b2245, transparent 60%),
+                radial-gradient(900px 700px at 120% 20%, #082b42, transparent 60%),
+                var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 #card-preview {
@@ -137,4 +147,192 @@ body {
 .card-ocean { 
     font-size: 24px;
     top: 175px; left: 40px; 
+}
+/* =========================
+   Thème & mise en page
+   ========================= */
+:root{
+  --bg: #0f1220;
+  --panel: rgba(255,255,255,0.07);
+  --panel-border: rgba(255,255,255,0.12);
+  --text: #e9ecf1;
+  --muted: #a9b0c3;
+  --accent: #6ea8ff;
+  --accent-2:#8ef0ff;
+  --success:#36d399;
+  --shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+html,body{
+  height:100%;
+}
+
+
+/* conteneur 2 colonnes */
+#form{
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  width: 800px;
+  display: grid;
+  grid-template-columns: 1fr;      /* mobile: 1 col */
+  gap: 16px 24px;
+  align-items: start;
+}
+
+/* Un “champ” = 1 item de grille */
+#form .field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Champs qui doivent prendre toute la largeur sur grand écran */
+#form .field.span-2{
+  grid-column: 1 / -1;
+}
+
+/* Dès que ça rentre, passe en 2 colonnes */
+@media (min-width: 950px){
+  #form{ grid-template-columns: 1fr 1fr; }
+}
+
+#card-preview{
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.5);
+  outline: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden; /* déjà présent, on confirme */
+}
+
+/* layout responsive simple */
+body > #form, body > #card-preview{
+  margin: 18px;
+  display: inline-block;
+  vertical-align: top;
+}
+@media (max-width: 980px){
+  body > #form, body > #card-preview{
+    display:block;
+    margin: 14px auto;
+  }
+}
+
+/* =========================
+   Champs de formulaire
+   ========================= */
+label{
+  display:block;
+  margin: 8px 0 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+textarea{
+  min-height: 70px;
+  resize: vertical;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder{
+  color: #cbd4e0;
+  opacity: .6;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus{
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(142,240,255,.15);
+  background: rgba(255,255,255,0.09);
+}
+
+/* input fichier */
+input[type="file"]{
+  border: 1px dashed rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.04);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* bouton */
+#create-card-form input[type="submit"],
+input[type="submit"]{
+  margin-top: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #08111a;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .08s ease, filter .2s ease;
+}
+#create-card-form input[type="submit"]:hover{
+  filter: saturate(1.15);
+  transform: translateY(-1px);
+}
+#create-card-form input[type="submit"]:active{
+  transform: translateY(0);
+}
+
+/* petites puces / radios mieux alignées */
+#form .radios, #form .inline, #form .radio-group{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+}
+
+#form input[type="radio"] {
+  margin-right: 4px;
+  accent-color: var(--accent); /* jolie couleur bleue */
+}
+
+#form label[for^="earth"],
+#form label[for^="leaf"],
+#form label[for^="ocean"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#card-preview:hover{
+  transform: translateY(-2px);
+  transition: transform .15s ease;
+}
+
+/* micro décor autour de la carte */
+#card-preview::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  pointer-events:none;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 30px rgba(0,0,0,.35);
+}
+
+select option {
+  background-color: #1c243a;  /* fond du menu */
+  color: #e9ecf1;
 }

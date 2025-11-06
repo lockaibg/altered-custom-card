@@ -2,8 +2,9 @@
     if(isset($_GET["type"])) {
         if($_GET["type"] === "character") {
             ?>
-                <br/>
+                <br/><div class="radio-group">
                 <label for="earth">Earth</label>
+                
                 <input type="radio" name="earth" value="0" checked />
                 <label for="0">0</label>
                 <input type="radio" name="earth" value="1"/>
@@ -26,9 +27,9 @@
                 <label for="9">9</label>
                 <input type="radio" name="earth" value="10"/>
                 <label for="10">10</label>
-                <br/>
-                <br/>
+                </div><div class="radio-group">
                 <label for="leaf">Leaf</label>
+                
                 <input type="radio" name="leaf" value="0" checked />
                 <label for="0">0</label>
                 <input type="radio" name="leaf" value="1"/>
@@ -51,9 +52,9 @@
                 <label for="9">9</label>
                 <input type="radio" name="leaf" value="10"/>
                 <label for="10">10</label>
-                <br/>
-                <br/>
+                </div><div class="radio-group">
                 <label for="ocean">Ocean</label>
+                
                 <input type="radio" name="ocean" value="0" checked />
                 <label for="0">0</label>
                 <input type="radio" name="ocean" value="1"/>
@@ -76,6 +77,7 @@
                 <label for="9">9</label>
                 <input type="radio" name="ocean" value="10"/>
                 <label for="10">10</label>
+                </div>
             <?php
         }
     }
