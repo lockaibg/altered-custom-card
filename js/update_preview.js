@@ -119,7 +119,8 @@ function updateEffect(text) {
 */
 function updateLore(text) {
     const zone = document.getElementById("preview-lore");
-    zone.innerHTML = text;
+    if(zone)
+        zone.innerHTML = text;
 }
 
 /* @param text : text a mettre a jour
@@ -128,7 +129,8 @@ function updateLore(text) {
 */
 function updateBonus(text) {
     const zone = document.getElementById("preview-bonus");
-    zone.innerHTML = text;
+    if(zone)
+        zone.innerHTML = text;
 }
 
 
@@ -140,6 +142,11 @@ window.addEventListener("DOMContentLoaded", () => {
     updateFaction(img, document.getElementById("card-faction").value);
     updateMana("HAND", document.getElementById("hand-cost").value);
     updateMana("RESERVE", document.getElementById("reserve-cost").value);
+    updateName(document.getElementById("name").value);
+    updateEffect(document.getElementById("card-effect").value);
+    updateLore(document.getElementById("card-lore").value);
+    updateBonus(document.getElementById("card-bonus").value);
+
 
     if(document.getElementById("card-type").value !== "token" && document.getElementById("card-type").value !== "character") {
         updateStats(0, "DELETE");
@@ -168,16 +175,16 @@ window.addEventListener("DOMContentLoaded", () => {
         const nb_value = e.target.value;
         updateMana("RESERVE", nb_value);
     });
-    document.getElementById("name").addEventListener("change", (e) => {
+    document.getElementById("name").addEventListener("input", (e) => {
         updateName(e.target.value);
     });
-    document.getElementById("card-effect").addEventListener("change", (e) => {
-        updateName(e.target.value);
+    document.getElementById("card-effect").addEventListener("input", (e) => {
+        updateEffect(e.target.value);
     });
-    document.getElementById("card-lore").addEventListener("change", (e) => {
-        updateName(e.target.value);
+    document.getElementById("card-lore").addEventListener("input", (e) => {
+        updateLore(e.target.value);
     });
-    document.getElementById("card-bonus").addEventListener("change", (e) => {
-        updateName(e.target.value);
+    document.getElementById("card-bonus").addEventListener("input", (e) => {
+        updateBonus(e.target.value);
     });
 });

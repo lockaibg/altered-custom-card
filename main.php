@@ -84,6 +84,8 @@
         <div class="card-content">
             <div class="card-name"><span id="preview-name">Nom de la carte</span></div>
             <div class="card-effect"><span id="preview-effect">Texte d’effet</span></div>
+            <div class="card-lore"><span id="preview-lore">Texte de Lore</span></div>
+            <div class="card-bonus"><span id="preview-bonus">Texte bonus</span></div>
             <div class="card-type"><span id="preview-type">Type</span></div>
             <div class="card-hand-cost"><span id="preview-hand-cost">1</span></div>
             <div class="card-reserve-cost"><span id="preview-reserve-cost">1</span></div>

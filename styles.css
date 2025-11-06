@@ -65,11 +65,32 @@ body {
 
 .card-effect {
     position: absolute;
-    bottom: 170px;
+    top: 320px;
     left: 25px;
     right: 20px;
     color: #000;
     font-size: 14px;
+    height: 300px;
+}
+
+.card-lore {
+    position: absolute;
+    top: 380px;
+    left: 25px;
+    right: 20px;
+    color: #000;
+    font-size: 14px;
+    height: 300px;
+}
+
+.card-bonus {
+    position: absolute;
+    top: 430px;
+    left: 25px;
+    right: 20px;
+    color: #000;
+    font-size: 14px;
+    height: 300px;
 }
 
 .card-type {
@@ -94,13 +115,13 @@ body {
 
 .card-hand-cost { 
     top: 23px; 
-    left: 33px; 
+    left: 29px; 
     font-family: "Work Sans";
     font-size: 28px;
     font-weight: bold;
 }
 .card-reserve-cost { 
-    top: 45px; left: 57px; 
+    top: 45px; left: 56px; 
     font-family: "Work Sans";
     font-size: 25px;
     font-weight: bold;
