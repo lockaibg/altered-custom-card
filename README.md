@@ -24,6 +24,9 @@
 ### Syntaxe des varriables
 ```^([a-z]+)([_][a-z]+)*$```
 
+### Syntaxe fonctions
+```^([a-z]+)([A-Z][a-z]+)*$```
+
 ### Commentaires
 *En cours*
 ```
