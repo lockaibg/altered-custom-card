@@ -4,6 +4,6 @@
 > main.php
 ### Fonction php :
 > token_type.php
-> > Donnée html pour le type de carte "token"
+>> Donnée html pour le type de carte "token"
 > update.php
-> > Donnée html pour les différents type de cartes
+>> Donnée html pour les différents type de cartes
