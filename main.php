@@ -8,11 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Jali+Greek:opsz,wght@8..144,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-
     <!--script pour mettre a jour le formulaire-->
     <script src="js/update_form.js"></script>
     <!--script pour mettre a jour la preview du document-->
     <script src="js/update_preview.js"></script>
+
 </head>
 <body>
   <div id="form">
@@ -84,7 +84,7 @@
 
   <div id="card-preview">
     <div class="card-illustration">
-      <img alt="Illustration" src="images/test.png" id="preview-illustration">
+      <img alt="Illustration" src="images/test.png" id="preview-illustration" height="520">
     </div>
 
     <div class="back-card">

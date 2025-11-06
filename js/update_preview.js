@@ -133,6 +133,12 @@ function updateBonus(text) {
         zone.innerHTML = text;
 }
 
+function updateIllustration(file) {
+    const img = document.getElementById("preview-illustration");
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    img.src = url;
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     const img = document.getElementById("card-background");
@@ -140,51 +146,77 @@ window.addEventListener("DOMContentLoaded", () => {
     //au chargement de la page afficher la carte correspondante
     updateCardType(document.getElementById("card-type").value, img);
     updateFaction(img, document.getElementById("card-faction").value);
-    updateMana("HAND", document.getElementById("hand-cost").value);
-    updateMana("RESERVE", document.getElementById("reserve-cost").value);
+    if(document.getElementById("hand-cost"))
+        updateMana("HAND", document.getElementById("hand-cost").value);
+    if(document.getElementById("reserve-cost"))
+        updateMana("RESERVE", document.getElementById("reserve-cost").value);
     updateName(document.getElementById("name").value);
     updateEffect(document.getElementById("card-effect").value);
     updateLore(document.getElementById("card-lore").value);
-    updateBonus(document.getElementById("card-bonus").value);
+    if(document.getElementById("card-bonus"))
+        updateBonus(document.getElementById("card-bonus").value);
+    if(document.getElementById("card-image"))
+        updateIllustration(document.getElementById("card-image").files[0]);
 
-
-    if(document.getElementById("card-type").value !== "token" && document.getElementById("card-type").value !== "character") {
+    if(document.getElementById("card-type").value !== "token" && document.getElementById("card-type").value !== "character") 
         updateStats(0, "DELETE");
-    }
 
     //quand un element est changé faire l'update
-    document.getElementById("card-type").addEventListener("change", (e) => {
-        const type_value = e.target.value;
-        updateCardType(type_value, img);
+    if(document.getElementById("card-type")){
+        document.getElementById("card-type").addEventListener("change", (e) => {
+            const type_value = e.target.value;
+            updateCardType(type_value, img);
 
-        //update des stats en fonction du type sélectionné
-        if(type_value !== "character" && type_value !== "token" )
-            updateStats(0, "DELETE");
-        else 
-            updateStats(0, "ALL");
-    });
-    document.getElementById("card-faction").addEventListener("change", (e) => {
-        const type_value = e.target.value;
-        updateFaction(img, type_value);
-    });
-    document.getElementById("hand-cost").addEventListener("change", (e) => {
-        const nb_value = e.target.value;
-        updateMana("HAND", nb_value);
-    });
-    document.getElementById("reserve-cost").addEventListener("change", (e) => {
-        const nb_value = e.target.value;
-        updateMana("RESERVE", nb_value);
-    });
-    document.getElementById("name").addEventListener("input", (e) => {
-        updateName(e.target.value);
-    });
-    document.getElementById("card-effect").addEventListener("input", (e) => {
-        updateEffect(e.target.value);
-    });
-    document.getElementById("card-lore").addEventListener("input", (e) => {
-        updateLore(e.target.value);
-    });
-    document.getElementById("card-bonus").addEventListener("input", (e) => {
-        updateBonus(e.target.value);
-    });
+            //update des stats en fonction du type sélectionné
+            if(type_value !== "character" && type_value !== "token" )
+                updateStats(0, "DELETE");
+            else 
+                updateStats(0, "ALL");
+        });
+    }
+    if(document.getElementById("card-faction")){
+        document.getElementById("card-faction").addEventListener("change", (e) => {
+            const type_value = e.target.value;
+            updateFaction(img, type_value);
+        });
+    }
+    if(document.getElementById("hand-cost")) {
+        document.getElementById("hand-cost").addEventListener("change", (e) => {
+            const nb_value = e.target.value;
+            updateMana("HAND", nb_value);
+        });
+    }
+    if(document.getElementById("reserve-cost")) {
+        document.getElementById("reserve-cost").addEventListener("change", (e) => {
+            const nb_value = e.target.value;
+            updateMana("RESERVE", nb_value);
+        });
+    }
+    if(document.getElementById("name")) {
+        document.getElementById("name").addEventListener("input", (e) => {
+            updateName(e.target.value);
+        });
+    }
+    if(document.getElementById("card-effect")){
+        document.getElementById("card-effect").addEventListener("input", (e) => {
+            updateEffect(e.target.value);
+        });
+    }
+    if(document.getElementById("card-lore")){
+        document.getElementById("card-lore").addEventListener("input", (e) => {
+            updateLore(e.target.value);
+        });
+    }
+    if(document.getElementById("card-bonus")) {
+        document.getElementById("card-bonus").addEventListener("input", (e) => {
+            updateBonus(e.target.value);
+        });
+    }
+    if(document.getElementById("card-image")) {
+        document.getElementById("card-image").addEventListener("change", (e) => {
+            console.log("qzf");
+            const file = e.target.files[0];
+            updateIllustration(file);
+        });
+    }
 });
