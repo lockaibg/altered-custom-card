@@ -1,4 +1,7 @@
-//fonction pour supprimer les coup et effet bonus si c'est un héro ou un token
+/* @param type : type de carte
+ * @ : si hero ou token suprimer les cout de main et reserve, ainsi que l'effet bonus
+ * @return : void
+*/
 function updateHeroToken(type) {
     if(type === "hero" || type === "token") {
         document.getElementById("hand-cost-div").innerHTML = "";
@@ -11,7 +14,10 @@ function updateHeroToken(type) {
     }
 }
 
-
+/* @param container : document.getElementById("additional-type");
+ * @ : ajouter l'event listener sur les stats si elles existent
+ * @return : void
+*/
 function addEventStats(container) {
     const ocean = container.querySelectorAll('[name="ocean"]');
     const earth = container.querySelectorAll('[name="earth"]');
@@ -35,7 +41,10 @@ function addEventStats(container) {
     }
 }
 
-//fonction pour ajouter l'event listener sur le type du token si il existe
+/* @param container : document.getElementById("additional-type");
+ * @ : ajouter l'event listener sur le type du token si il existe
+ * @return : void
+*/
 function addEventToken(container) {
     const token = container.querySelector("#token-type");
     if(token) {
@@ -61,6 +70,7 @@ window.addEventListener("DOMContentLoaded", () => {
         .then(response => response.text())
         .then(html => {
             container.innerHTML = html;
+
             //si on a des stats on ajoute un listener sur ces dernières
             addEventStats(container);
             
@@ -68,8 +78,6 @@ window.addEventListener("DOMContentLoaded", () => {
             addEventToken(container);
         });
     
-    //affichage de la bonne carte au chargement de la page
-
     //quand card-type est modifié on ajoute ou supprime le php correspondant au type sélectionné
     document.getElementById("card-type").addEventListener("change", (e) => {
         type = e.target.value;

@@ -9,7 +9,10 @@ const spell = 8;
 const hero = 12;
 const token = 13;
 
-//fonction pour trouver la coordonnée de la carte voulus a partir de se position sur la spritsheet
+/* @param position : position de la carte voulue sur la spritsheet
+ * @ : trouver la coordonnée de la carte sur la spritsheet
+ * @return : coordinates = {row_coordinates, column coordinates}
+*/
 function findCoordonates(position) {
     const row_position = position % 6;
     const column_position = Math.floor(position / 6);
@@ -19,7 +22,12 @@ function findCoordonates(position) {
     }
     return (coordinates);
 }
-//fonction utilisé pour update le type de carte
+
+/* @param value : type de carte
+ * @param img : <img alt="Card frame" src="images/ordis.webp" id="card-background">
+ * @ : utilisé pour update le type de carte
+ * @return : void
+*/
 function updateCardType(value, img) {
     var coordinates;
     switch(value) {
@@ -43,12 +51,46 @@ function updateCardType(value, img) {
     img.style.left = `-${coordinates.row_coordinates}px`;
     document.getElementById("preview-type").innerHTML = value;
 }
-//fonction pour update les stats de la carte
+
+/* @param stat : valeur de la stat (0-10)
+ * @param type : "DELETE" : suprimer les valeures or "ALL" mettre tout a 0 or mettre la update la stat de ce type
+ * @ : utilisé pour update les stats
+ * @return : void
+*/
 function updateStats(stat, type) {
-    var stat_preview = document.getElementById(`preview-${type}`);
-    stat_preview.innerHTML = stat;
+    if(type === "DELETE") {
+        document.getElementById("preview-earth").innerHTML = "";
+        document.getElementById("preview-ocean").innerHTML = "";
+        document.getElementById("preview-leaf").innerHTML = "";
+    } else if (type === "ALL") {
+        document.getElementById("preview-earth").innerHTML = stat;
+        document.getElementById("preview-ocean").innerHTML = stat;
+        document.getElementById("preview-leaf").innerHTML = stat;
+    } else {
+        var stat_preview = document.getElementById(`preview-${type}`);
+        stat_preview.innerHTML = stat;
+    }
 }
 
+/* @param type : "HAND" or "RESERVE" or "BOTH"
+ * @param value : integer
+ * @ : changer la valeure d'un ou des couts de mana sur la preview
+ * @return : void
+*/
+function updateMana(type, value) {
+    if(type === "BOTH") {
+        document.getElementById("preview-hand-cost").innerHTML = value;
+        document.getElementById("preview-reserve-cost").innerHTML = value;
+    } else {
+        document.getElementById(`preview-${type.toLowerCase()}-cost`).innerHTML = value;
+    }
+}
+
+/* @param img : <img alt="Card frame" src="images/ordis.webp" id="card-background">
+ * @param faction : faction a mettre
+ * @ : changer la carte pour une autre faction
+ * @return : void
+*/
 function updateFaction(img, faction) {
     img.src = `images/${faction}.webp`;
 }
@@ -59,15 +101,34 @@ window.addEventListener("DOMContentLoaded", () => {
     //au chargement de la page afficher la carte correspondante
     updateCardType(document.getElementById("card-type").value, img);
     updateFaction(img, document.getElementById("card-faction").value);
+    updateMana("HAND", document.getElementById("hand-cost").value);
+    updateMana("RESERVE", document.getElementById("reserve-cost").value);
 
-    //quand le type de carte est changé, changé la carte utilisé
+    if(document.getElementById("card-type").value !== "token" && document.getElementById("card-type").value !== "character") {
+        updateStats(0, "DELETE");
+    }
+
+    //quand un element est changé faire l'update
     document.getElementById("card-type").addEventListener("change", (e) => {
         const type_value = e.target.value;
         updateCardType(type_value, img);
+
+        //update des stats en fonction du type sélectionné
+        if(type_value !== "character" && type_value !== "token" )
+            updateStats(0, "DELETE");
+        else 
+            updateStats(0, "ALL");
     });
     document.getElementById("card-faction").addEventListener("change", (e) => {
         const type_value = e.target.value;
         updateFaction(img, type_value);
     });
-
+    document.getElementById("hand-cost").addEventListener("change", (e) => {
+        const nb_value = e.target.value;
+        updateMana("HAND", nb_value);
+    });
+    document.getElementById("reserve-cost").addEventListener("change", (e) => {
+        const nb_value = e.target.value;
+        updateMana("RESERVE", nb_value);
+    });
 });

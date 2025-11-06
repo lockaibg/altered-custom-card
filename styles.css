@@ -93,7 +93,8 @@ body {
 }
 
 .card-hand-cost { 
-    top: 25px; left: 30px; 
+    top: 23px; 
+    left: 40px; 
     font-family: "Work Sans";
     font-size: 28px;
     font-weight: bold;
