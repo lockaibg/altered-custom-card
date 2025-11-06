@@ -95,6 +95,43 @@ function updateFaction(img, faction) {
     img.src = `images/${faction}.webp`;
 }
 
+/* @param text : text a mettre a jour
+ * @ : utilisé pour update le nom des cartes
+ * @return : void
+*/
+function updateName(text) {
+    const zone = document.getElementById("preview-name");
+    zone.innerHTML = text;
+}
+
+/* @param text : text a mettre a jour
+ * @ : utilisé pour update l'effet
+ * @return : void
+*/
+function updateEffect(text) {
+    const zone = document.getElementById("preview-effect");
+    zone.innerHTML = text;
+}
+
+/* @param text : text a mettre a jour
+ * @ : utilisé pour update le lore
+ * @return : void
+*/
+function updateLore(text) {
+    const zone = document.getElementById("preview-lore");
+    zone.innerHTML = text;
+}
+
+/* @param text : text a mettre a jour
+ * @ : utilisé pour update le bonus de reserve
+ * @return : void
+*/
+function updateBonus(text) {
+    const zone = document.getElementById("preview-bonus");
+    zone.innerHTML = text;
+}
+
+
 window.addEventListener("DOMContentLoaded", () => {
     const img = document.getElementById("card-background");
 
@@ -130,5 +167,17 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reserve-cost").addEventListener("change", (e) => {
         const nb_value = e.target.value;
         updateMana("RESERVE", nb_value);
+    });
+    document.getElementById("name").addEventListener("change", (e) => {
+        updateName(e.target.value);
+    });
+    document.getElementById("card-effect").addEventListener("change", (e) => {
+        updateName(e.target.value);
+    });
+    document.getElementById("card-lore").addEventListener("change", (e) => {
+        updateName(e.target.value);
+    });
+    document.getElementById("card-bonus").addEventListener("change", (e) => {
+        updateName(e.target.value);
     });
 });
