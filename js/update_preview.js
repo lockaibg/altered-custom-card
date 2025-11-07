@@ -16,7 +16,8 @@ const emojis = {
     "{d}": "images/discard.png",
     "{f}": "images/arrow.png",
     "{r}": "images/reserve2.png",
-    "{h}": "images/hand.png"
+    "{h}": "images/hand.png",
+    "{t}": "images/tap.png"
 };
 
 let bool_bonus = false; // true si la case de bonus est active false sinon
@@ -231,8 +232,9 @@ function updateBonus(text, img) {
         }
     }
     const zone = document.getElementById("preview-bonus");
+    text_emoji = convertWithEmojis(text);
     if(zone)
-        zone.innerHTML = text;
+        zone.innerHTML = text_emoji;
 }
 
 /* @param file : image importé

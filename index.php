@@ -12,6 +12,9 @@
     <script src="js/update_form.js"></script>
     <!--script pour mettre a jour la preview du document-->
     <script src="js/update_preview.js"></script>
+    <!--import de la bibliotheque pour le telchargement de la carte et srcipt correspondant-->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="js/save.js"></script>
 
 </head>
 <body>
@@ -77,7 +80,7 @@
         </div>
 
         <div class="field span-2" style="display:flex;justify-content:center;">
-          <input type="submit" value="Save">
+          <input type="submit" id="save-card" value="Save PNG">
         </div>
 
       </form>
