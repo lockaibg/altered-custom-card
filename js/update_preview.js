@@ -37,37 +37,48 @@ function updateCardType(value, img) {
     const effect = document.getElementsByClassName("zone-effect")[0];
     const name = document.getElementsByClassName("card-name")[0];
     const type = document.getElementsByClassName("card-type")[0];
+    const hand_cost = document.getElementById("preview-hand-cost");
+    const reserve_cost = document.getElementById("preview-reserve-cost");
     switch(value) {
         case "character":
             coordinates = findCoordonates(character);
             effect.style.top = "370px";
-            effect.style.left = "25px";
-            effect.style.right = "20px";
             name.style.top = "30px";
             type.style.top = "53px";
+            hand_cost.innerHTML = "0";
+            reserve_cost.innerHTML = "0";
             break;
         case "permanent":
             coordinates = findCoordonates(permanent);
             effect.style.top = "370px";
-            effect.style.left = "25px";
-            effect.style.right = "20px";
             name.style.top = "292px";
-            type.style.top = "314px";
-
+            type.style.top = "312px";
+            hand_cost.innerHTML = "0";
+            reserve_cost.innerHTML = "0";
             break;
         case "spell":
             coordinates = findCoordonates(spell);
             effect.style.top = "370px";
-            effect.style.left = "25px";
-            effect.style.right = "20px";
             name.style.top = "30px";
             type.style.top = "53px";
+            hand_cost.innerHTML = "0";
+            reserve_cost.innerHTML = "0";
             break;
         case "hero":
             coordinates = findCoordonates(hero);
+            effect.style.top = "358px";
+            name.style.top = "34px";
+            type.style.top = "60px";
+            hand_cost.innerHTML = "";
+            reserve_cost.innerHTML = "";
             break;
         case "token":
             coordinates = findCoordonates(token);
+            effect.style.top = "415px";
+            name.style.top = "30px";
+            type.style.top = "53px";
+            hand_cost.innerHTML = "";
+            reserve_cost.innerHTML = "";
             break;
     }
     img.style.top = `-${coordinates.column_coordinates}px`;
@@ -227,6 +238,8 @@ window.addEventListener("DOMContentLoaded", () => {
     updateLore(document.getElementById("card-lore").value);
     if(document.getElementById("card-bonus"))
         updateBonus(document.getElementById("card-bonus").value, img);
+    else 
+        updateBonus("", img);
     if(document.getElementById("card-image"))
         updateIllustration(document.getElementById("card-image").files[0]);
 
@@ -245,7 +258,10 @@ window.addEventListener("DOMContentLoaded", () => {
             else 
                 updateStats(0, "ALL");
             bool_bonus = false;
-            updateBonus(document.getElementById("card-bonus").value , img);
+            if(document.getElementById("card-bonus"))
+                updateBonus(document.getElementById("card-bonus").value, img);
+            else 
+                updateBonus("", img);
         });
     }
     if(document.getElementById("card-faction")){

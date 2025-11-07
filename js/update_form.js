@@ -68,6 +68,10 @@ function addEventToken(container) {
     if(token) {
         token.addEventListener("change", (e) => {
             const token_type = e.target.value;
+            if(token_type === "landmark") 
+                updateStats(0, "DELETE");
+            else 
+                updateStats(0, "ALL");
             fetch(`token_type.php?type=${token_type}`)
                 .then(response => response.text())
                 .then(html => {
