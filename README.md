@@ -29,7 +29,8 @@
 
 ### Commentaires
 *En cours*
-```
+Commentaires de fontions
+> ```
 /* @param "parametre" : "description du parametre"
  * @param...
  * @ : "descritpion de la fonction"
