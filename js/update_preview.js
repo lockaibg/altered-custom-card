@@ -3,17 +3,21 @@ const WIDTH = 372;
 const HEIGHT = 520;
 
 //position de la premiere carte de chaque type
-const character = 0;
-const permanent = 4;
-const spell = 8;
+const character = 2;
+const permanent = 6;
+const spell = 10;
 const hero = 12;
 const token = 13;
+
+let bool_bonus = false; // true si la case de bonus est active false sinon
+let current_position; // la position actuelle de la carte sur la spritesheet
 
 /* @param position : position de la carte voulue sur la spritsheet
  * @ : trouver la coordonnée de la carte sur la spritsheet
  * @return : coordinates = {row_coordinates, column coordinates}
 */
 function findCoordonates(position) {
+    current_position = position;
     const row_position = position % 6;
     const column_position = Math.floor(position / 6);
     const coordinates = {
@@ -124,15 +128,47 @@ function updateLore(text) {
 }
 
 /* @param text : text a mettre a jour
+ * @param img : <img alt="Card frame" src="images/ordis.webp" id="card-background">
  * @ : utilisé pour update le bonus de reserve
+ * @ : monte le text d'effet et de lore de 40px pour ajouter la zone de bonus et la redescent pour l'enlever
  * @return : void
 */
-function updateBonus(text) {
+function updateBonus(text, img) {
+    if(!bool_bonus && text !== "") { 
+        let coordinates = findCoordonates(current_position - 2); // position - 2 = carte avec case d'effet bonus
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+        bool_bonus = true;
+        let effect = document.getElementsByClassName("card-effect")[0];
+        let lore = document.getElementsByClassName("card-lore")[0];
+        let currentTopEffect = parseInt(window.getComputedStyle(effect).top);
+        let currentTopLore = parseInt(window.getComputedStyle(lore).top)
+        console.log(currentTopEffect);
+        console.log(currentTopLore);
+        effect.style.top = (currentTopEffect - 40) + "px";
+        lore.style.top = (currentTopLore - 40) + "px";
+    } else if(text === "" && bool_bonus) {
+        let coordinates = findCoordonates(current_position + 2); // position + 2 = carte sans case d'effet bonus
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+        bool_bonus = false;
+        let effect = document.getElementsByClassName("card-effect")[0];
+        let lore = document.getElementsByClassName("card-lore")[0];
+        let currentTopEffect = parseInt(window.getComputedStyle(effect).top);
+        let currentTopLore = parseInt(window.getComputedStyle(lore).top)
+        effect.style.top = (currentTopEffect + 40) + "px";
+        lore.style.top = (currentTopLore + 40) + "px";
+    }
     const zone = document.getElementById("preview-bonus");
     if(zone)
         zone.innerHTML = text;
 }
 
+/* @param file : image importé
+ * @ : mettre l'image importé par l'utilisateur 
+ * @ : TODO : vérifier que c'est bien une image valide
+ * @return : void
+*/
 function updateIllustration(file) {
     const img = document.getElementById("preview-illustration");
     if (!file) return;
@@ -154,7 +190,7 @@ window.addEventListener("DOMContentLoaded", () => {
     updateEffect(document.getElementById("card-effect").value);
     updateLore(document.getElementById("card-lore").value);
     if(document.getElementById("card-bonus"))
-        updateBonus(document.getElementById("card-bonus").value);
+        updateBonus(document.getElementById("card-bonus").value, img);
     if(document.getElementById("card-image"))
         updateIllustration(document.getElementById("card-image").files[0]);
 
@@ -209,7 +245,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     if(document.getElementById("card-bonus")) {
         document.getElementById("card-bonus").addEventListener("input", (e) => {
-            updateBonus(e.target.value);
+            updateBonus(e.target.value, img);
         });
     }
     if(document.getElementById("card-image")) {
