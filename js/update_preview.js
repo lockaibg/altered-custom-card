@@ -9,8 +9,31 @@ const spell = 10;
 const hero = 12;
 const token = 13;
 
+const emojis = {
+    "{o}": "images/ocean.png",
+    "{e}": "images/earth.png",
+    "{l}": "images/leaf.png",
+    "{d}": "images/discard.png",
+    "{f}": "images/arrow.png",
+    "{r}": "images/reserve2.png",
+    "{h}": "images/hand.png"
+};
+
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
+
+/* @param texte : texte a convertir en emojis
+ * @ remplacer tout les {...} du texte par les emojis correspondants
+ * @return : texte_without_emoji
+*/ 
+function convertWithEmojis(texte) {
+    let retour = texte;
+    for (const [key, value] of Object.entries(emojis)) {
+        retour = retour.replaceAll(key, `<img src="${value}" alt="${key}" class="emoji">&nbsp;`);
+    }
+    return retour;
+}
+
 
 /* @param position : position de la carte voulue sur la spritsheet
  * @ : trouver la coordonnée de la carte sur la spritsheet
@@ -145,7 +168,8 @@ function updateName(text) {
 */
 function updateEffect(text) {
     const zone = document.getElementById("preview-effect");
-    zone.innerHTML = text;
+    text_emoji = convertWithEmojis(text);
+    zone.innerHTML = text_emoji;
 }
 
 /* @param text : text a mettre a jour
