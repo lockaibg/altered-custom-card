@@ -8,10 +8,28 @@ function updateHeroToken(type) {
         document.getElementById("reserve-cost-div").innerHTML = "";
         document.getElementById("card-bonus-div").innerHTML = "";
     } else if (document.getElementById("hand-cost-div").innerHTML === ""){
-        document.getElementById("hand-cost-div").innerHTML = '<br/><label for="hand-cost">Hand cost :</label><input type="number" id="hand-cost" name="hand-cost" min="0" value="0" max="10"/><br/>';
-        document.getElementById("reserve-cost-div").innerHTML = '<br/><label for="reserve-cost">Reserve cost :</label><input type="number" id="reserve-cost" name="reserve-cost" min="0" value="0" max="10"/><br/>';
-        document.getElementById("card-bonus-div").innerHTML = '<br/><label for="card-bonus">Reserve effect :</label><textarea id="card-bonus" name="card-bonus"></textarea><br/>';
+        document.getElementById("hand-cost-div").innerHTML = '<label for="hand-cost">Hand cost :</label><input type="number" id="hand-cost" name="hand-cost" min="0" value="0" max="10"/>';
+        document.getElementById("reserve-cost-div").innerHTML = '<label for="reserve-cost">Reserve cost :</label><input type="number" id="reserve-cost" name="reserve-cost" min="0" value="0" max="10"/>';
+        document.getElementById("card-bonus-div").innerHTML = '<textarea id="card-bonus" name="card-bonus" placeholder="Reserve effect"></textarea>';
+        if(document.getElementById("hand-cost")) {
+            document.getElementById("hand-cost").addEventListener("change", (e) => {
+                const nb_value = e.target.value;
+                updateMana("HAND", nb_value);
+            });
+        }
+        if(document.getElementById("reserve-cost")) {
+            document.getElementById("reserve-cost").addEventListener("change", (e) => {
+                const nb_value = e.target.value;
+                updateMana("RESERVE", nb_value);
+            });
+        }
+        if(document.getElementById("card-bonus")) {
+            document.getElementById("card-bonus").addEventListener("input", (e) => {
+                updateBonus(e.target.value, document.getElementById("card-background"));
+            });
+        }
     }
+    
 }
 
 /* @param container : document.getElementById("additional-type");

@@ -34,15 +34,34 @@ function findCoordonates(position) {
 */
 function updateCardType(value, img) {
     var coordinates;
+    const effect = document.getElementsByClassName("zone-effect")[0];
+    const name = document.getElementsByClassName("card-name")[0];
+    const type = document.getElementsByClassName("card-type")[0];
     switch(value) {
         case "character":
             coordinates = findCoordonates(character);
+            effect.style.top = "370px";
+            effect.style.left = "25px";
+            effect.style.right = "20px";
+            name.style.top = "30px";
+            type.style.top = "53px";
             break;
         case "permanent":
             coordinates = findCoordonates(permanent);
+            effect.style.top = "370px";
+            effect.style.left = "25px";
+            effect.style.right = "20px";
+            name.style.top = "292px";
+            type.style.top = "314px";
+
             break;
         case "spell":
             coordinates = findCoordonates(spell);
+            effect.style.top = "370px";
+            effect.style.left = "25px";
+            effect.style.right = "20px";
+            name.style.top = "30px";
+            type.style.top = "53px";
             break;
         case "hero":
             coordinates = findCoordonates(hero);
@@ -54,6 +73,7 @@ function updateCardType(value, img) {
     img.style.top = `-${coordinates.column_coordinates}px`;
     img.style.left = `-${coordinates.row_coordinates}px`;
     document.getElementById("preview-type").innerHTML = value;
+    // modifier la position relative des éléments sur la carte
 }
 
 /* @param stat : valeur de la stat (0-10)
@@ -123,8 +143,12 @@ function updateEffect(text) {
 */
 function updateLore(text) {
     const zone = document.getElementById("preview-lore");
-    if(zone)
-        zone.innerHTML = text;
+    if(zone) {
+        if(text === "")
+            zone.innerHTML = "";
+        else
+            zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid black ;"></span><br/>' + text;    
+    }
 }
 
 /* @param text : text a mettre a jour
@@ -134,30 +158,42 @@ function updateLore(text) {
  * @return : void
 */
 function updateBonus(text, img) {
-    if(!bool_bonus && text !== "") { 
+    if(!bool_bonus && text !== "") {
         let coordinates = findCoordonates(current_position - 2); // position - 2 = carte avec case d'effet bonus
         img.style.top = `-${coordinates.column_coordinates}px`;
         img.style.left = `-${coordinates.row_coordinates}px`;
+
         bool_bonus = true;
-        let effect = document.getElementsByClassName("card-effect")[0];
-        let lore = document.getElementsByClassName("card-lore")[0];
-        let currentTopEffect = parseInt(window.getComputedStyle(effect).top);
-        let currentTopLore = parseInt(window.getComputedStyle(lore).top)
-        console.log(currentTopEffect);
-        console.log(currentTopLore);
-        effect.style.top = (currentTopEffect - 40) + "px";
-        lore.style.top = (currentTopLore - 40) + "px";
+
+        let effect = document.getElementsByClassName("zone-effect")[0];
+        let current_top_effect = parseInt(window.getComputedStyle(effect).top);
+        effect.style.top = (current_top_effect - 40) + "px";
+        if(document.getElementById("card-type").value === "permanent") {
+            let title = document.getElementsByClassName("card-name")[0];
+            let type = document.getElementsByClassName("card-type")[0];
+            let current_top_title = parseInt(window.getComputedStyle(title).top);
+            let current_top_type = parseInt(window.getComputedStyle(type).top);
+            title.style.top = (current_top_title - 34) + "px";
+            type.style.top = (current_top_type - 34) + "px";
+        }
     } else if(text === "" && bool_bonus) {
         let coordinates = findCoordonates(current_position + 2); // position + 2 = carte sans case d'effet bonus
         img.style.top = `-${coordinates.column_coordinates}px`;
         img.style.left = `-${coordinates.row_coordinates}px`;
+
         bool_bonus = false;
-        let effect = document.getElementsByClassName("card-effect")[0];
-        let lore = document.getElementsByClassName("card-lore")[0];
-        let currentTopEffect = parseInt(window.getComputedStyle(effect).top);
-        let currentTopLore = parseInt(window.getComputedStyle(lore).top)
-        effect.style.top = (currentTopEffect + 40) + "px";
-        lore.style.top = (currentTopLore + 40) + "px";
+
+        let effect = document.getElementsByClassName("zone-effect")[0];
+        let current_top_effect = parseInt(window.getComputedStyle(effect).top);
+        effect.style.top = (current_top_effect + 40) + "px";
+        if(document.getElementById("card-type").value === "permanent") {
+            let title = document.getElementsByClassName("card-name")[0];
+            let type = document.getElementsByClassName("card-type")[0];
+            let current_top_title = parseInt(window.getComputedStyle(title).top);
+            let current_top_type = parseInt(window.getComputedStyle(type).top);
+            title.style.top = (current_top_title + 34) + "px";
+            type.style.top = (current_top_type + 34) + "px";
+        }
     }
     const zone = document.getElementById("preview-bonus");
     if(zone)
@@ -208,6 +244,8 @@ window.addEventListener("DOMContentLoaded", () => {
                 updateStats(0, "DELETE");
             else 
                 updateStats(0, "ALL");
+            bool_bonus = false;
+            updateBonus(document.getElementById("card-bonus").value , img);
         });
     }
     if(document.getElementById("card-faction")){
