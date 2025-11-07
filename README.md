@@ -31,9 +31,9 @@
 *En cours*
 Commentaires de fontions
 > ```
-/* @param "parametre" : "description du parametre"
- * @param...
- * @ : "descritpion de la fonction"
- * @return : "type et varriable de retour"
-*/
-```
+> /* @param "parametre" : "description du parametre"
+>  * @param...
+>  * @ : "descritpion de la fonction"
+>  * @return : "type et varriable de retour"
+> */
+> ```
