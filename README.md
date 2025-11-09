@@ -41,7 +41,6 @@ Commentaires de fontions
 
 ### TODO
 - modify image position
-- dinamically make the text zone bigger
 - additional types
 - add buttons for the hand reserv etc logos
 - make the stat radio into buttons
