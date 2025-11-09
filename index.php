@@ -20,6 +20,9 @@
 
 </head>
 <body>
+  <header>
+    <p>I'm still working on this website, you can already create simple card if you want to try it. If you want to fork : github : https://github.com/lockaibg/altered-custom-card (find the TODO in the README)</p>
+  </header>
   <main>
     <div id="form">
       <form>
@@ -117,6 +120,7 @@
         <div class="card-earth"><span id="preview-earth">0</span></div>
         <div class="card-leaf"><span id="preview-leaf">0</span></div>
         <div class="card-ocean"><span id="preview-ocean">0</span></div>
+        <div class="card-undermark"><span id="preview-undermark">altered-custom-card.com, &copy; 2025 Equinox</span></div>
       </div>
     </div>
   </main>

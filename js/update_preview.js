@@ -18,7 +18,9 @@ const emojis = {
     "{r}": "images/reserve2",
     "{h}": "images/hand",
     "{t}": "images/tap",
-    "\\n": "<br/>"
+    "\\n": "<br/>",
+    "*": "<b>",
+    "_": "</b>"
 };
 
 let bool_bonus = false; // true si la case de bonus est active false sinon
@@ -29,17 +31,17 @@ let current_rarity = ""; // la rareté actuelle
  * @ remplacer tout les {...} du texte par les emojis correspondants
  * @return : texte_without_emoji
 */ 
-function convertWithEmojis(texte) {
+function convertWithEmojis(texte, is_bonus) {
     let retour = texte;
     for (const [key, value] of Object.entries(emojis)) {
-        if(value !== "<br/>") {
-            if(current_rarity !== "unique")
+        if(value !== "<br/>" && value !== "<b>" && value !== "</b>" ) {
+            if(current_rarity !== "unique" || is_bonus)
                 retour = retour.replaceAll(key, `<img src="${value}.png" alt="${key}" class="emoji">&nbsp;`);
             else
                 retour = retour.replaceAll(key, `<img src="${value}_b.png" alt="${key}" class="emoji">&nbsp;`);
         } else {
-            retour = retour.replaceAll(key, "<br/>");
-        }
+            retour = retour.replaceAll(key, value);
+        } 
     }
     return retour;
 }
@@ -99,8 +101,8 @@ function updateCardType(value, img) {
         case "hero":
             coordinates = findCoordonates(hero);
             effect.style.top = "358px";
-            name.style.top = "34px";
-            type.style.top = "60px";
+            name.style.top = "36px";
+            type.style.top = "62px";
             hand_cost.innerHTML = "";
             reserve_cost.innerHTML = "";
             break;
@@ -116,6 +118,9 @@ function updateCardType(value, img) {
     img.style.top = `-${coordinates.column_coordinates}px`;
     img.style.left = `-${coordinates.row_coordinates}px`;
     document.getElementById("preview-type").innerHTML = value;
+    if(value = "hero") {
+        document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value;
+    }
     // modifier la position relative des éléments sur la carte
 }
 
@@ -177,7 +182,7 @@ function updateName(text) {
 */
 function updateEffect(text) {
     const zone = document.getElementById("preview-effect");
-    text_emoji = convertWithEmojis(text);
+    text_emoji = convertWithEmojis(text, false);
     zone.innerHTML = text_emoji;
 }
 
@@ -244,7 +249,7 @@ function updateBonus(text, img) {
         }
     }
     const zone = document.getElementById("preview-bonus");
-    text_emoji = convertWithEmojis(text);
+    text_emoji = convertWithEmojis(text, true);
     if(zone)
         zone.innerHTML = text_emoji;
 }
@@ -315,7 +320,7 @@ function updateRarity(rarity, img) {
             break;
     }
     updateLore(document.getElementById("card-lore").value);
-    document.getElementById("preview-effect").innerHTML = convertWithEmojis(document.getElementById("card-effect").value);
+    document.getElementById("preview-effect").innerHTML = convertWithEmojis(document.getElementById("card-effect").value, false);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -407,7 +412,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     if(document.getElementById("card-image")) {
         document.getElementById("card-image").addEventListener("change", (e) => {
-            console.log("qzf");
             const file = e.target.files[0];
             updateIllustration(file);
         });
