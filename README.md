@@ -47,3 +47,4 @@ Commentaires de fontions
 - make the stat radio into buttons
 - if token : add a "commun" faction
 - add landmarks and reserve lots for heros
+- update colors under stats but that's not programation and that's annoying to do
