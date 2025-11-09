@@ -117,9 +117,18 @@
         <div class="card-type"><span id="preview-type">Type</span></div>
         <div class="card-hand-cost"><span id="preview-hand-cost">1</span></div>
         <div class="card-reserve-cost"><span id="preview-reserve-cost">1</span></div>
-        <div class="card-earth"><span id="preview-earth">0</span></div>
-        <div class="card-leaf"><span id="preview-leaf">0</span></div>
-        <div class="card-ocean"><span id="preview-ocean">0</span></div>
+        <div class="card-leaf">
+          <div class="fond-stat" id="leaf"><img src="images/leaf_small.png" alt="leaf background" width="33" id="leaf-background"/></div>
+          <span id="preview-leaf">0</span>
+        </div>
+        <div class="card-earth">
+          <div class="fond-stat" id="earth"><img src="images/earth_small.png" alt="earth background" width="33" id="earth-background"/></div>
+          <span id="preview-earth">0</span>
+        </div>
+        <div class="card-ocean">
+          <div class="fond-stat" id="ocean"><img src="images/ocean_small.png" alt="ocean background" width="33" id="ocean-background"/></div>
+          <span id="preview-ocean">0</span>
+        </div>
         <div class="card-undermark"><span id="preview-undermark">altered-custom-card.com, &copy; 2025 Equinox</span></div>
       </div>
     </div>

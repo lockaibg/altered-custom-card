@@ -119,10 +119,8 @@ function updateCardType(value, img) {
     img.style.left = `-${coordinates.row_coordinates}px`;
     const with_caps = value[0].toUpperCase() + value.substring(1); // majuscule
     document.getElementById("preview-type").innerHTML = with_caps;
-    if(value === "hero") {
+    if(value === "hero") 
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
-    }
-    // modifier la position relative des éléments sur la carte
 }
 
 /* @param stat : valeur de la stat (0-10)
@@ -135,10 +133,18 @@ function updateStats(stat, type) {
         document.getElementById("preview-earth").innerHTML = "";
         document.getElementById("preview-ocean").innerHTML = "";
         document.getElementById("preview-leaf").innerHTML = "";
+        let els = document.getElementsByClassName("fond-stat")
+        Array.prototype.forEach.call(els, function(el) {
+            el.innerHTML = "";
+        });  
     } else if (type === "ALL") {
         document.getElementById("preview-earth").innerHTML = stat;
         document.getElementById("preview-ocean").innerHTML = stat;
         document.getElementById("preview-leaf").innerHTML = stat;
+        let els = document.getElementsByClassName("fond-stat")
+        Array.prototype.forEach.call(els, function(el) {
+            el.innerHTML = `<img src="images/${el.id}_small.png" alt="${el.id} background" width="33" id="${el.id}-background"/>`;
+        });  
     } else {
         var stat_preview = document.getElementById(`preview-${type}`);
         stat_preview.innerHTML = stat;
