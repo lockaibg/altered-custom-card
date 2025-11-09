@@ -1,7 +1,7 @@
 # Altered custom card generator
 ## Langages et arborescence
 ### Page principale : 
-```main.php```
+```index.php```
 
 ### Fonctions php :
 ```token_type.php```
@@ -38,3 +38,13 @@ Commentaires de fontions
 >  * @return : "type et varriable de retour"
 > */
 > ```
+
+### TODO
+- modify image position
+- dinamically make the text zone bigger
+- add colors to the stat zone
+- additional types
+- add buttons for the hand reserv etc logos
+- make the stat radio into buttons
+- patch style.left for mana cost when it's 1 or 10
+- if token : add a "commun" faction
