@@ -1,4 +1,7 @@
 # Altered custom card generator
+## Quick overview
+Altered is a card game created by Equinoxe and published in 2024. As a good TCG fan I've always want to create cards for a game. So before creating the card I'm creating the website that'll allow everyone to invent their own cards.
+
 ## Languages and Structure
 ### Main page : 
 ```index.php```
