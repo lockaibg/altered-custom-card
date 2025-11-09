@@ -4,31 +4,6 @@
         case "character":
             ?>
                 <br/><div class="radio-group">
-                <label for="earth">Earth</label>
-                
-                <input type="radio" name="earth" value="0" checked />
-                <label for="0">0</label>
-                <input type="radio" name="earth" value="1"/>
-                <label for="1">1</label>
-                <input type="radio" name="earth" value="2"/>
-                <label for="2">2</label>
-                <input type="radio" name="earth" value="3"/>
-                <label for="3">3</label>
-                <input type="radio" name="earth" value="4"/>
-                <label for="4">4</label>
-                <input type="radio" name="earth" value="5"/>
-                <label for="5">5</label>
-                <input type="radio" name="earth" value="6"/>
-                <label for="6">6</label>
-                <input type="radio" name="earth" value="7"/>
-                <label for="7">7</label>
-                <input type="radio" name="earth" value="8"/>
-                <label for="8">8</label>
-                <input type="radio" name="earth" value="9"/>
-                <label for="9">9</label>
-                <input type="radio" name="earth" value="10"/>
-                <label for="10">10</label>
-                </div><div class="radio-group">
                 <label for="leaf">Leaf</label>
                 
                 <input type="radio" name="leaf" value="0" checked />
@@ -53,7 +28,35 @@
                 <label for="9">9</label>
                 <input type="radio" name="leaf" value="10"/>
                 <label for="10">10</label>
-                </div><div class="radio-group">
+                </div>
+                <div class="radio-group">
+
+                <label for="earth">Earth</label>
+                <input type="radio" name="earth" value="0" checked />
+                <label for="0">0</label>
+                <input type="radio" name="earth" value="1"/>
+                <label for="1">1</label>
+                <input type="radio" name="earth" value="2"/>
+                <label for="2">2</label>
+                <input type="radio" name="earth" value="3"/>
+                <label for="3">3</label>
+                <input type="radio" name="earth" value="4"/>
+                <label for="4">4</label>
+                <input type="radio" name="earth" value="5"/>
+                <label for="5">5</label>
+                <input type="radio" name="earth" value="6"/>
+                <label for="6">6</label>
+                <input type="radio" name="earth" value="7"/>
+                <label for="7">7</label>
+                <input type="radio" name="earth" value="8"/>
+                <label for="8">8</label>
+                <input type="radio" name="earth" value="9"/>
+                <label for="9">9</label>
+                <input type="radio" name="earth" value="10"/>
+                <label for="10">10</label>
+                </div>
+                
+                <div class="radio-group">
                 <label for="ocean">Ocean</label>
                 
                 <input type="radio" name="ocean" value="0" checked />
@@ -83,32 +86,8 @@
             break;
         case "token":
             ?><div id="additional-token">
-            <br/><div class="radio-group">
-                <label for="earth">Earth</label>
-                
-                <input type="radio" name="earth" value="0" checked />
-                <label for="0">0</label>
-                <input type="radio" name="earth" value="1"/>
-                <label for="1">1</label>
-                <input type="radio" name="earth" value="2"/>
-                <label for="2">2</label>
-                <input type="radio" name="earth" value="3"/>
-                <label for="3">3</label>
-                <input type="radio" name="earth" value="4"/>
-                <label for="4">4</label>
-                <input type="radio" name="earth" value="5"/>
-                <label for="5">5</label>
-                <input type="radio" name="earth" value="6"/>
-                <label for="6">6</label>
-                <input type="radio" name="earth" value="7"/>
-                <label for="7">7</label>
-                <input type="radio" name="earth" value="8"/>
-                <label for="8">8</label>
-                <input type="radio" name="earth" value="9"/>
-                <label for="9">9</label>
-                <input type="radio" name="earth" value="10"/>
-                <label for="10">10</label>
-                </div><div class="radio-group">
+            <br/>
+            </div><br/><div class="radio-group">
                 <label for="leaf">Leaf</label>
                 
                 <input type="radio" name="leaf" value="0" checked />
@@ -133,7 +112,35 @@
                 <label for="9">9</label>
                 <input type="radio" name="leaf" value="10"/>
                 <label for="10">10</label>
-                </div><div class="radio-group">
+                </div>
+                <div class="radio-group">
+
+                <label for="earth">Earth</label>
+                <input type="radio" name="earth" value="0" checked />
+                <label for="0">0</label>
+                <input type="radio" name="earth" value="1"/>
+                <label for="1">1</label>
+                <input type="radio" name="earth" value="2"/>
+                <label for="2">2</label>
+                <input type="radio" name="earth" value="3"/>
+                <label for="3">3</label>
+                <input type="radio" name="earth" value="4"/>
+                <label for="4">4</label>
+                <input type="radio" name="earth" value="5"/>
+                <label for="5">5</label>
+                <input type="radio" name="earth" value="6"/>
+                <label for="6">6</label>
+                <input type="radio" name="earth" value="7"/>
+                <label for="7">7</label>
+                <input type="radio" name="earth" value="8"/>
+                <label for="8">8</label>
+                <input type="radio" name="earth" value="9"/>
+                <label for="9">9</label>
+                <input type="radio" name="earth" value="10"/>
+                <label for="10">10</label>
+                </div>
+                
+                <div class="radio-group">
                 <label for="ocean">Ocean</label>
                 
                 <input type="radio" name="ocean" value="0" checked />

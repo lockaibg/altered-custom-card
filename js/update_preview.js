@@ -19,8 +19,8 @@ const emojis = {
     "{h}": "images/hand",
     "{t}": "images/tap",
     "\\n": "<br/>",
-    "*": "<b>",
-    "_": "</b>"
+    "[": "<b>",
+    "]": "</b>"
 };
 
 let bool_bonus = false; // true si la case de bonus est active false sinon
@@ -143,11 +143,49 @@ function updateStats(stat, type) {
         document.getElementById("preview-leaf").innerHTML = stat;
         let els = document.getElementsByClassName("fond-stat")
         Array.prototype.forEach.call(els, function(el) {
-            el.innerHTML = `<img src="images/${el.id}_small.png" alt="${el.id} background" width="33" id="${el.id}-background"/>`;
+            el.innerHTML = `<img src="images/${el.id}_normal.png" alt="${el.id} background" height="31" id="${el.id}-background"/>`;
         });  
     } else {
         var stat_preview = document.getElementById(`preview-${type}`);
         stat_preview.innerHTML = stat;
+        const earth_stat = parseInt(document.getElementById("preview-earth").innerHTML);
+        const ocean_stat = parseInt(document.getElementById("preview-ocean").innerHTML);
+        const leaf_stat = parseInt(document.getElementById("preview-leaf").innerHTML);
+        let modified = {
+            "earth": false,
+            "leaf": false,
+            "ocean": false
+        }
+        //un plus grand
+        if(earth_stat > ocean_stat && earth_stat > leaf_stat) {
+            modified["earth"] = true;
+            document.getElementById("earth").innerHTML = '<img src="images/earth_large.png" alt="earth background" height="31" id="earth-background"/>';
+        } else if(ocean_stat > earth_stat && ocean_stat > leaf_stat) {
+            modified["ocean"] = true;
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_large.png" alt="ocean background" height="31" id="ocean-background"/>';
+        } else if(leaf_stat > ocean_stat && leaf_stat > earth_stat) {
+            modified["leaf"] = true;
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_large.png" alt="leaf background" height="31" id="leaf-background"/>';
+        }
+        //un plus petit
+        if(earth_stat < ocean_stat && earth_stat < leaf_stat) {
+            modified["earth"] = true;
+            document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/>';
+        } else if(ocean_stat < earth_stat && ocean_stat < leaf_stat) {
+            modified["ocean"] = true;
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/>';
+        } else if(leaf_stat < ocean_stat && leaf_stat < earth_stat) {
+            modified["leaf"] = true;
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
+        }
+        //si ni l'un ni l'autre
+        if(!modified["earth"])
+            document.getElementById("earth").innerHTML = '<img src="images/earth_normal.png" alt="earth background" height="31" id="earth-background"/>';
+        if(!modified["leaf"])
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_normal.png" alt="leaf background" height="31" id="leaf-background"/>';
+        if(!modified["ocean"])
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_normal.png" alt="ocean background" height="31" id="ocean-background"/>';
+
     }
 }
 
@@ -182,7 +220,7 @@ function updateMana(type, value) {
             if(type === "HAND") {
                 document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "29px";
             } else {
-                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "56px";                
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "57px";                
             }
             break;
     }
