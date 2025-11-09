@@ -48,3 +48,4 @@ Commentaires de fontions
 - make the stat radio into buttons
 - patch style.left for mana cost when it's 1 or 10
 - if token : add a "commun" faction
+- add landmarks and reserve lots for heros
