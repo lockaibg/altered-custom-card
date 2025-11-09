@@ -134,7 +134,7 @@
     </div>
   </main>
   <footer>
-    <p>Les données présentées sur ce site proviennent de sources publiques appartenant à Equinox. Ce site n’a aucun lien officiel avec cette entreprise.</p>
+    <p>The data presented on this site comes from public sources belonging to Equinox. This site has no official connection with this company.</p>
   </footer>
 </body>
 
