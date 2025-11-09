@@ -42,9 +42,9 @@ Commentaires de fontions
 ### TODO
 - modify image position
 - dinamically make the text zone bigger
-- add colors to the stat zone
 - additional types
 - add buttons for the hand reserv etc logos
 - make the stat radio into buttons
 - if token : add a "commun" faction
 - add landmarks and reserve lots for heros
+- update colors under stats but that's not programation and that's annoying to do
