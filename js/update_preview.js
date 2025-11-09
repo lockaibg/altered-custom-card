@@ -26,6 +26,7 @@ const emojis = {
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
 let current_rarity = ""; // la rareté actuelle
+let bool_augmented_text_area = false;
 
 /* @param texte : texte a convertir en emojis
  * @ remplacer tout les {...} du texte par les emojis correspondants
@@ -76,7 +77,7 @@ function updateCardType(value, img) {
     switch(value) {
         case "character":
             coordinates = findCoordonates(character);
-            effect.style.top = "370px";
+            effect.style.top = "360px";
             name.style.top = "30px";
             type.style.top = "53px";
             hand_cost.innerHTML = "0";
@@ -84,7 +85,7 @@ function updateCardType(value, img) {
             break;
         case "permanent":
             coordinates = findCoordonates(permanent);
-            effect.style.top = "370px";
+            effect.style.top = "360px";
             name.style.top = "291px";
             type.style.top = "314px";
             hand_cost.innerHTML = "0";
@@ -92,7 +93,7 @@ function updateCardType(value, img) {
             break;
         case "spell":
             coordinates = findCoordonates(spell);
-            effect.style.top = "370px";
+            effect.style.top = "360px";
             name.style.top = "30px";
             type.style.top = "53px";
             hand_cost.innerHTML = "0";
@@ -100,7 +101,7 @@ function updateCardType(value, img) {
             break;
         case "hero":
             coordinates = findCoordonates(hero);
-            effect.style.top = "358px";
+            effect.style.top = "348px";
             name.style.top = "36px";
             type.style.top = "62px";
             hand_cost.innerHTML = "";
@@ -121,6 +122,8 @@ function updateCardType(value, img) {
     document.getElementById("preview-type").innerHTML = with_caps;
     if(value === "hero") 
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
+    bool_augmented_text_area = false;
+    updateEffect(document.getElementById("card-effect").value);
 }
 
 /* @param stat : valeur de la stat (0-10)
@@ -265,6 +268,54 @@ function updateEffect(text) {
     const zone = document.getElementById("preview-effect");
     text_emoji = convertWithEmojis(text, false);
     zone.innerHTML = text_emoji;
+    if(document.getElementById("card-type").value !== "hero" && document.getElementById("card-type").value !== "token") {
+        const lore_zone = document.getElementById("preview-lore");
+        let max_ligne
+        if(!bool_bonus) 
+            max_ligne = 120;
+        else
+            max_ligne = 98;
+        if(zone.offsetHeight + lore_zone.offsetHeight > max_ligne && !bool_augmented_text_area) {
+            const img = document.getElementById("card-background");
+            coordinates = findCoordonates(current_position + 1);
+            img.style.top = `-${coordinates.column_coordinates}px`;
+            img.style.left = `-${coordinates.row_coordinates}px`;
+
+            const effect = document.getElementsByClassName("zone-effect")[0];
+            const current_top_effect = parseInt(window.getComputedStyle(effect).top);
+            effect.style.top = (current_top_effect - 40) + "px";
+
+            bool_augmented_text_area = true;
+            if(document.getElementById("card-type").value === "permanent") {
+                const name = document.getElementsByClassName("card-name")[0];
+                const type = document.getElementsByClassName("card-type")[0];
+                const name_current_top = parseInt(window.getComputedStyle(name).top);
+                const type_current_top = parseInt(window.getComputedStyle(type).top);
+                name.style.top = (name_current_top - 35) + "px";
+                type.style.top = (type_current_top - 35) + "px";
+            }
+        } else if (zone.offsetHeight + lore_zone.offsetHeight <= max_ligne && bool_augmented_text_area) {
+            const img = document.getElementById("card-background");
+            coordinates = findCoordonates(current_position - 1);
+            img.style.top = `-${coordinates.column_coordinates}px`;
+            img.style.left = `-${coordinates.row_coordinates}px`;
+
+            const effect = document.getElementsByClassName("zone-effect")[0];
+            const current_top_effect = parseInt(window.getComputedStyle(effect).top);
+            effect.style.top = (current_top_effect + 40) + "px";
+
+            bool_augmented_text_area = false;
+
+            if(document.getElementById("card-type").value === "permanent") {
+                const name = document.getElementsByClassName("card-name")[0];
+                const type = document.getElementsByClassName("card-type")[0];
+                const name_current_top = parseInt(window.getComputedStyle(name).top);
+                const type_current_top = parseInt(window.getComputedStyle(type).top);
+                name.style.top = (name_current_top + 35) + "px";
+                type.style.top = (type_current_top + 35) + "px";
+            }
+        }
+    }
 }
 
 /* @param text : text a mettre a jour
@@ -282,6 +333,54 @@ function updateLore(text) {
             else
                  zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid white ;"></span><br/>' + text;
         }  
+    }
+    if(document.getElementById("card-type").value !== "hero" && document.getElementById("card-type").value !== "token") {
+        const lore_zone = document.getElementById("preview-effect");
+        let max_ligne
+        if(!bool_bonus) 
+            max_ligne = 120;
+        else
+            max_ligne = 98;
+        if(zone.offsetHeight + lore_zone.offsetHeight > max_ligne && !bool_augmented_text_area) {
+            const img = document.getElementById("card-background");
+            coordinates = findCoordonates(current_position + 1);
+            img.style.top = `-${coordinates.column_coordinates}px`;
+            img.style.left = `-${coordinates.row_coordinates}px`;
+
+            const effect = document.getElementsByClassName("zone-effect")[0];
+            const current_top_effect = parseInt(window.getComputedStyle(effect).top);
+            effect.style.top = (current_top_effect - 40) + "px";
+
+            bool_augmented_text_area = true;
+            if(document.getElementById("card-type").value === "permanent") {
+                const name = document.getElementsByClassName("card-name")[0];
+                const type = document.getElementsByClassName("card-type")[0];
+                const name_current_top = parseInt(window.getComputedStyle(name).top);
+                const type_current_top = parseInt(window.getComputedStyle(type).top);
+                name.style.top = (name_current_top - 35) + "px";
+                type.style.top = (type_current_top - 35) + "px";
+            }
+        } else if (zone.offsetHeight + lore_zone.offsetHeight <= max_ligne && bool_augmented_text_area) {
+            const img = document.getElementById("card-background");
+            coordinates = findCoordonates(current_position - 1);
+            img.style.top = `-${coordinates.column_coordinates}px`;
+            img.style.left = `-${coordinates.row_coordinates}px`;
+
+            const effect = document.getElementsByClassName("zone-effect")[0];
+            const current_top_effect = parseInt(window.getComputedStyle(effect).top);
+            effect.style.top = (current_top_effect + 40) + "px";
+
+            bool_augmented_text_area = false;
+
+            if(document.getElementById("card-type").value === "permanent") {
+                const name = document.getElementsByClassName("card-name")[0];
+                const type = document.getElementsByClassName("card-type")[0];
+                const name_current_top = parseInt(window.getComputedStyle(name).top);
+                const type_current_top = parseInt(window.getComputedStyle(type).top);
+                name.style.top = (name_current_top + 35) + "px";
+                type.style.top = (type_current_top + 35) + "px";
+            }
+        }
     }
 }
 
@@ -307,8 +406,13 @@ function updateBonus(text, img) {
             let type = document.getElementsByClassName("card-type")[0];
             let current_top_title = parseInt(window.getComputedStyle(title).top);
             let current_top_type = parseInt(window.getComputedStyle(type).top);
-            title.style.top = (current_top_title - 34) + "px";
-            type.style.top = (current_top_type - 34) + "px";
+            if(!bool_augmented_text_area) {
+                title.style.top = (current_top_title - 34) + "px";
+                type.style.top = (current_top_type - 34) + "px";
+            } else {
+                title.style.top = (current_top_title - 39) + "px";
+                type.style.top = (current_top_type - 39) + "px";
+            }
         }
     } else if(text === "" && bool_bonus) {
         let coordinates = findCoordonates(current_position + 2); // position + 2 = carte sans case d'effet bonus
@@ -325,14 +429,20 @@ function updateBonus(text, img) {
             let type = document.getElementsByClassName("card-type")[0];
             let current_top_title = parseInt(window.getComputedStyle(title).top);
             let current_top_type = parseInt(window.getComputedStyle(type).top);
-            title.style.top = (current_top_title + 34) + "px";
-            type.style.top = (current_top_type + 34) + "px";
+            if(!bool_augmented_text_area) {
+                title.style.top = (current_top_title + 34) + "px";
+                type.style.top = (current_top_type + 34) + "px";
+            } else {
+                title.style.top = (current_top_title + 39) + "px";
+                type.style.top = (current_top_type + 39) + "px";
+            }
         }
     }
     const zone = document.getElementById("preview-bonus");
     text_emoji = convertWithEmojis(text, true);
     if(zone)
         zone.innerHTML = text_emoji;
+    updateEffect(document.getElementById("card-effect").value);
 }
 
 /* @param file : image importé

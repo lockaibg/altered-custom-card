@@ -100,7 +100,7 @@ main {
     top: 430px;
     left: 25px;
     right: 20px;
-    color: #000;
+    color: #FFF;
     font-size: 14px;
     height: 300px;
     z-index: 4;
@@ -182,6 +182,10 @@ main {
 #preview-ocean {
   position: absolute;
   left: 13px;
+}
+
+#preview-lore {
+  font-style: italic;
 }
 
 #leaf-background, #earth-background, #ocean-background {
