@@ -39,7 +39,7 @@ Commentaires de fontions
 > */
 > ```
 
-### TODO
+## TODO
 - modify image position
 - additional types
 - add buttons for the hand reserv etc logos
