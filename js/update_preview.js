@@ -178,7 +178,20 @@ function updateStats(stat, type) {
             modified["leaf"] = true;
             document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
         }
-        //si ni l'un ni l'autre
+        
+        if(earth_stat === 0) {
+            modified["earth"] = true;
+            document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/>';
+        }
+        if(leaf_stat === 0) {
+            modified["leaf"] = true;
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
+        }
+        if(ocean_stat === 0) {
+            modified["ocean"] = true;
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/>';
+        }
+        //si aucune des conditions précédentes
         if(!modified["earth"])
             document.getElementById("earth").innerHTML = '<img src="images/earth_normal.png" alt="earth background" height="31" id="earth-background"/>';
         if(!modified["leaf"])
