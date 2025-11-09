@@ -1,41 +1,41 @@
 # Altered custom card generator
-## Langages et arborescence
-### Page principale : 
+## Languages and Structure
+### Main page : 
 ```index.php```
 
-### Fonctions php :
+### PHP functions :
 ```token_type.php```
-> Donnée html pour le type de carte "token"
+> HTML data for the "token" card type
 
 ```update.php```
-> Donnée html pour les différents type de cartes
+> HTML data for the different card types
 
-### JS :
+### JavaScript :
 ```update_form.js```
-> script métant a jour dynamiquement les données du formulaire sur la page principale
+> script dynamically updating the form data on the main page
 
 ```update_preview.js```
-> script métant a jour la preview de la carte en fonction des options coché dans le formulaire
+> script updating the card preview according to the options checked in the form
 
-## Syntax et Commentaires
-### Syntaxe des id et classes
+## Syntax and Comments
+### ID and class syntax
 ```^([a-z]+)([-][a-z]+)*$```
 
-### Syntaxe des varriables
+### Variable syntax
 ```^([a-z]+)([_][a-z]+)*$```
 
-### Syntaxe fonctions
+### Function syntax
 ```^([a-z]+)([A-Z][a-z]+)*$```
 
-### Commentaires
-*En cours*
+### Comments
+*In progress*
 
-Commentaires de fontions
+Function comments
 > ```
-> /* @param "parametre" : "description du parametre"
->  * @param...
->  * @ : "descritpion de la fonction"
->  * @return : "type et varriable de retour"
+> /* @param "parameter" : "description of the parameter"
+> * @param...
+> * @ : "description of the function"
+> * @return : "type and return variable"
 > */
 > ```
 
