@@ -85,8 +85,8 @@ function updateCardType(value, img) {
         case "permanent":
             coordinates = findCoordonates(permanent);
             effect.style.top = "370px";
-            name.style.top = "292px";
-            type.style.top = "312px";
+            name.style.top = "291px";
+            type.style.top = "314px";
             hand_cost.innerHTML = "0";
             reserve_cost.innerHTML = "0";
             break;
@@ -117,9 +117,10 @@ function updateCardType(value, img) {
     }
     img.style.top = `-${coordinates.column_coordinates}px`;
     img.style.left = `-${coordinates.row_coordinates}px`;
-    document.getElementById("preview-type").innerHTML = value;
-    if(value = "hero") {
-        document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value;
+    const with_caps = value[0].toUpperCase() + value.substring(1); // majuscule
+    document.getElementById("preview-type").innerHTML = with_caps;
+    if(value === "hero") {
+        document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
     }
     // modifier la position relative des éléments sur la carte
 }
@@ -155,6 +156,29 @@ function updateMana(type, value) {
         document.getElementById("preview-reserve-cost").innerHTML = value;
     } else {
         document.getElementById(`preview-${type.toLowerCase()}-cost`).innerHTML = value;
+    }
+    switch(value) {
+        case "1":
+            if(type === "HAND") {
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "30px";
+            } else {
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "58px";                
+            }
+            break;
+        case "10":
+            if(type === "HAND") {
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "22px";
+            } else {
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "53px";                
+            }
+            break;
+        default:
+            if(type === "HAND") {
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "29px";
+            } else {
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "56px";                
+            }
+            break;
     }
 }
 
