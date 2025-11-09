@@ -81,11 +81,35 @@ function addEventToken(container) {
     }
 }
 
+function updateRarityForm(type) {
+    const zone = document.getElementsByClassName("rarity")[0];
+    switch(type) {
+        case "hero":
+            zone.innerHTML = "";
+            break;
+        case "token":
+            zone.innerHTML = "";
+            break;
+        case "character":
+            zone.innerHTML = '<label for="card-rarity">Rarity :</label><select id="card-rarity" name="card-rarity"><option value="commun">Commun</option><option value="rare">Rare</option><option value="unique">Unique</option></select>';
+            break;
+        default:
+            zone.innerHTML = '<label for="card-rarity">Rarity :</label><select id="card-rarity" name="card-rarity"><option value="commun">Commun</option><option value="rare">Rare</option></select>';
+            break;
+    }
+    if(document.getElementById("card-rarity")) {
+        document.getElementById("card-rarity").addEventListener("change", (e) => {
+            updateRarity(e.target.value, document.getElementById("card-background"));
+        });
+    }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
-    var type = document.getElementById("card-type").value;
+    let type = document.getElementById("card-type").value;
     const container = document.getElementById("additional-type");
     //supprimer les éléments pour hero et token
     updateHeroToken(type);
+    updateRarityForm(type);
 
     //vérification du type sélectionné au load de la page
     fetch(`update.php?type=${type}`)
@@ -105,6 +129,7 @@ window.addEventListener("DOMContentLoaded", () => {
         type = e.target.value;
         //supprimer les éléments pour hero
         updateHeroToken(type);
+        updateRarityForm(type);
 
         fetch(`update.php?type=${type}`)
             .then(response => response.text())

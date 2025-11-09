@@ -50,7 +50,14 @@
             <option value="axiom">Axiom</option>
           </select>
         </div>
-
+        <div class="field rarity">
+          <label for="card-rarity">Rarity :</label>
+          <select id="card-rarity" name="card-rarity">
+            <option value="commun">Commun</option>
+            <option value="rare">Rare</option>
+            <option value="unique">Unique</option>
+          </select>
+        </div>
         <!-- zone dynamique injectée par JS/PHP -->
         <div class="field span-2" id="additional-type"></div>
 

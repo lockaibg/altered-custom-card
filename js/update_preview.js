@@ -10,18 +10,20 @@ const hero = 12;
 const token = 13;
 
 const emojis = {
-    "{o}": "images/ocean.png",
-    "{e}": "images/earth.png",
-    "{l}": "images/leaf.png",
-    "{d}": "images/discard.png",
-    "{f}": "images/arrow.png",
-    "{r}": "images/reserve2.png",
-    "{h}": "images/hand.png",
-    "{t}": "images/tap.png"
+    "{o}": "images/ocean",
+    "{e}": "images/earth",
+    "{l}": "images/leaf",
+    "{d}": "images/discard",
+    "{f}": "images/arrow",
+    "{r}": "images/reserve2",
+    "{h}": "images/hand",
+    "{t}": "images/tap",
+    "\\n": "<br/>"
 };
 
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
+let current_rarity = ""; // la rareté actuelle
 
 /* @param texte : texte a convertir en emojis
  * @ remplacer tout les {...} du texte par les emojis correspondants
@@ -30,11 +32,17 @@ let current_position; // la position actuelle de la carte sur la spritesheet
 function convertWithEmojis(texte) {
     let retour = texte;
     for (const [key, value] of Object.entries(emojis)) {
-        retour = retour.replaceAll(key, `<img src="${value}" alt="${key}" class="emoji">&nbsp;`);
+        if(value !== "<br/>") {
+            if(current_rarity !== "unique")
+                retour = retour.replaceAll(key, `<img src="${value}.png" alt="${key}" class="emoji">&nbsp;`);
+            else
+                retour = retour.replaceAll(key, `<img src="${value}_b.png" alt="${key}" class="emoji">&nbsp;`);
+        } else {
+            retour = retour.replaceAll(key, "<br/>");
+        }
     }
     return retour;
 }
-
 
 /* @param position : position de la carte voulue sur la spritsheet
  * @ : trouver la coordonnée de la carte sur la spritsheet
@@ -182,8 +190,12 @@ function updateLore(text) {
     if(zone) {
         if(text === "")
             zone.innerHTML = "";
-        else
-            zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid black ;"></span><br/>' + text;    
+        else {
+            if(current_rarity !== "unique")
+                zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid black ;"></span><br/>' + text;
+            else
+                 zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid white ;"></span><br/>' + text;
+        }  
     }
 }
 
@@ -249,11 +261,71 @@ function updateIllustration(file) {
     img.src = url;
 }
 
+/* @param rarity : rareté sélectionné
+ * @param img : document.getElementById("card-background")
+ * @ : modifier la rareté de la carte
+ * @return : void
+*/
+function updateRarity(rarity, img) {
+    const effect = document.getElementsByClassName("zone-effect")[0];
+    switch(rarity) {
+        case "rare":
+            if(current_rarity === "commun" || current_rarity === "") {
+                current_rarity = "rare";
+                coordinates = findCoordonates(current_position + 14);
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+            } else if(current_rarity === "unique") {
+                current_rarity = "rare";
+                coordinates = findCoordonates(current_position - 12);
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+            }
+            effect.style.color = "#000";
+            break;
+        case "commun":
+            if(current_rarity === "rare") {
+                current_rarity = "commun";
+                coordinates = findCoordonates(current_position - 14);
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+            } else if(current_rarity === "unique") {
+                current_rarity = "commun";
+                coordinates = findCoordonates(current_position - 26);
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+            }
+            effect.style.color = "#000";
+            break;
+        case "unique": 
+        //TODO : emoji en blanc et orange
+            if(current_rarity === "rare") {
+                current_rarity = "unique";
+                effect.style.color = "#fff";
+                coordinates = findCoordonates(current_position + 12);
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+            } else if(current_rarity === "commun" || current_rarity === "") {
+                current_rarity = "unique";
+                effect.style.color = "#fff";
+                coordinates = findCoordonates(current_position + 26);
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+            }
+            break;
+    }
+    updateLore(document.getElementById("card-lore").value);
+    document.getElementById("preview-effect").innerHTML = convertWithEmojis(document.getElementById("card-effect").value);
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     const img = document.getElementById("card-background");
 
     //au chargement de la page afficher la carte correspondante
-    updateCardType(document.getElementById("card-type").value, img);
+
+    updateCardType(document.getElementById("card-type").value, img);    
+    if(document.getElementById("card-rarity"))
+        updateRarity(document.getElementById("card-rarity").value, img);
     updateFaction(img, document.getElementById("card-faction").value);
     if(document.getElementById("hand-cost"))
         updateMana("HAND", document.getElementById("hand-cost").value);
@@ -278,6 +350,11 @@ window.addEventListener("DOMContentLoaded", () => {
             const type_value = e.target.value;
             updateCardType(type_value, img);
 
+            //mettre a jour la rareté
+            if(type_value !== "hero" && type_value !== "token") {
+                current_rarity = "commun";
+                updateRarity(document.getElementById("card-rarity").value, img)
+            }
             //update des stats en fonction du type sélectionné
             if(type_value !== "character" && type_value !== "token" )
                 updateStats(0, "DELETE");
@@ -335,4 +412,9 @@ window.addEventListener("DOMContentLoaded", () => {
             updateIllustration(file);
         });
     }
+    /*if(document.getElementById("card-rarity")) {
+        document.getElementById("card-rarity").addEventListener("change", (e) => {
+            updateRarity(e.target.value, img);
+        });
+    }*/
 });
