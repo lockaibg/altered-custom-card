@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-    <title>Creating...</title>
+    <title>Altered customs - Creating...</title>
     <link rel="stylesheet" href="styles.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Jali+Greek:opsz,wght@8..144,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
 
@@ -30,9 +32,8 @@
         <div class="field span-2">
           <input type="text" id="name" name="name" placeholder="Card name"/>
         </div>
-
-        <div class="field">
-          <label for="card-type">Type :</label>
+        <br/>
+        <div class="field type">
           <select id="card-type" name="card-type">
             <option value="permanent">Permanent</option>
             <option value="spell">Spell</option>
@@ -40,40 +41,41 @@
             <option value="hero">Hero</option>
             <option value="character">Character</option>
           </select>
+          <input type="text" id="card-add-type" name="card-add-type" placeholder="Additional type"/>
         </div>
-
-        <div class="field">
-          <label for="card-faction">Faction :</label>
-          <select id="card-faction" name="card-faction">
-            <option value="ordis">Ordis</option>
-            <option value="bravos">Bravos</option>
-            <option value="muna">Muna</option>
-            <option value="lyra">Lyra</option>
-            <option value="yzmir">Yzmir</option>
-            <option value="axiom">Axiom</option>
-          </select>
-        </div>
-        <div class="field rarity">
-          <label for="card-rarity">Rarity :</label>
-          <select id="card-rarity" name="card-rarity">
-            <option value="commun">Commun</option>
-            <option value="rare">Rare</option>
-            <option value="unique">Unique</option>
-          </select>
-        </div>
+        <br/>
+        <div class="selects">
+          <div class="field faction">
+            <select id="card-faction" name="card-faction">
+              <option value="ordis">Ordis</option>
+              <option value="bravos">Bravos</option>
+              <option value="muna">Muna</option>
+              <option value="lyra">Lyra</option>
+              <option value="yzmir">Yzmir</option>
+              <option value="axiom">Axiom</option>
+            </select>
+          </div>
+          <div class="field rarity">
+            <select id="card-rarity" name="card-rarity">
+              <option value="commun">Commun</option>
+              <option value="rare">Rare</option>
+              <option value="unique">Unique</option>
+            </select>
+          </div>
+      </div>
         <!-- zone dynamique injectée par JS/PHP -->
         <div class="field span-2" id="additional-type"></div>
+        <div class="cost-div">
+          <div class="field" id="hand-cost-div">
+            <label for="hand-cost">Hand cost&nbsp;:</label>
+            <input type="number" id="hand-cost" name="hand-cost" min="0" value="0" max="10"/>
+          </div>
 
-        <div class="field" id="hand-cost-div">
-          <label for="hand-cost">Hand cost :</label>
-          <input type="number" id="hand-cost" name="hand-cost" min="0" value="0" max="10"/>
-        </div>
-
-        <div class="field" id="reserve-cost-div">
-          <label for="reserve-cost">Reserve cost :</label>
-          <input type="number" id="reserve-cost" name="reserve-cost" min="0" value="0" max="10"/>
-        </div>
-
+          <div class="field" id="reserve-cost-div">
+            <label for="reserve-cost">Reserve cost&nbsp;:</label>
+            <input type="number" id="reserve-cost" name="reserve-cost" min="0" value="0" max="10"/>
+          </div>
+      </div>
         <div class="field span-2">
           <label for="card-image">Illustration :</label>
           <input type="file" id="card-image" name="card-image" accept="image/*" />

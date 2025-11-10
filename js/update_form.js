@@ -91,10 +91,10 @@ function updateRarityForm(type) {
             zone.innerHTML = "";
             break;
         case "character":
-            zone.innerHTML = '<label for="card-rarity">Rarity :</label><select id="card-rarity" name="card-rarity"><option value="commun">Commun</option><option value="rare">Rare</option><option value="unique">Unique</option></select>';
+            zone.innerHTML = '<select id="card-rarity" name="card-rarity"><option value="commun">Commun</option><option value="rare">Rare</option><option value="unique">Unique</option></select>';
             break;
         default:
-            zone.innerHTML = '<label for="card-rarity">Rarity :</label><select id="card-rarity" name="card-rarity"><option value="commun">Commun</option><option value="rare">Rare</option></select>';
+            zone.innerHTML = '<select id="card-rarity" name="card-rarity"><option value="commun">Commun</option><option value="rare">Rare</option></select>';
             break;
     }
     if(document.getElementById("card-rarity")) {

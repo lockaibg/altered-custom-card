@@ -612,6 +612,15 @@ function updateRarity(rarity, img) {
     document.getElementById("preview-effect").innerHTML = convertWithEmojis(document.getElementById("card-effect").value, false);
 }
 
+function updateAdditionalType(text) {
+    const type = document.getElementById("card-type").value[0].toUpperCase() + document.getElementById("card-type").value.substring(1);
+    const value = document.getElementById("preview-type");
+    if(text !== "")
+        value.innerHTML = type + " - " + text;
+    else 
+        value.innerHTML = type;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     const img = document.getElementById("card-background");
 
@@ -628,6 +637,8 @@ window.addEventListener("DOMContentLoaded", () => {
     updateName(document.getElementById("name").value);
     updateEffect(document.getElementById("card-effect").value);
     updateLore(document.getElementById("card-lore").value);
+    updateAdditionalType(document.getElementById("card-add-type").value);
+
     if(document.getElementById("card-bonus"))
         updateBonus(document.getElementById("card-bonus").value, img);
     else 
@@ -749,5 +760,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             });      
         }); 
+    }
+    if(document.getElementById("card-add-type")) {
+        document.getElementById("card-add-type").addEventListener("input", (e) => {
+            updateAdditionalType(e.target.value);
+        });
     }
 });

@@ -254,6 +254,34 @@ textarea{
   transition: border-color .2s, box-shadow .2s, background .2s;
 }
 
+.type {
+  display: flex;
+  gap: 2%;
+}
+
+#card-type {
+  width: 30%;
+}
+
+.faction, .rarity {
+  width: 49%;
+}
+
+.selects {
+  width: 100%;
+  display: flex;
+  gap: 2%;
+}
+
+#hand-cost-div, #reserve-cost-div {
+  width: 49%;
+}
+
+.cost-div {
+  display: flex;
+  gap: 2%;
+}
+
 textarea{
   min-height: 70px;
   resize: vertical;
