@@ -2,7 +2,7 @@ body {
     min-height: 100dvh;     
     display: flex;                    
     flex-direction: column;           
-    font-family: "Jali Greek Variable", "Jali Greek", sans-serif;
+    font-family: "jali-greek-variable", "Jali Greek", sans-serif;
     margin: 0;
     background: radial-gradient(1200px 800px at 20% -10%, #1b2245, transparent 60%),
                 radial-gradient(900px 700px at 120% 20%, #082b42, transparent 60%),
@@ -91,7 +91,7 @@ main {
     left: 30px;
     right: 30px;
     color: #000;
-    font-size: 14px;
+    font-size: 15px;
     height: 300px;
     z-index: 4;
 }
@@ -124,7 +124,7 @@ main {
     width: 100%;
     text-align: center;
     color: #FFF;
-    font-size: 9px;
+    font-size: 10px;
     z-index: 4;
 }
 
@@ -135,21 +135,19 @@ main {
 .card-ocean {
     position: absolute;
     color: #fff;
-    text-shadow: 0 0 4px #000;
+    text-shadow: 1 1 4px #000;
 }
 
 .card-hand-cost { 
-    top: 24px; 
-    left: 29px; 
-    font-family: "Work Sans";
-    font-size: 28px;
+    top: 19px; 
+    left: 32px; 
+    font-size: 32px;
     font-weight: bold;
     z-index: 4;
 }
 .card-reserve-cost { 
-    top: 47px; left: 56px; 
-    font-family: "Work Sans";
-    font-size: 23px;
+    top: 42px; left: 56px; 
+    font-size: 27px;
     font-weight: bold;
     z-index: 4;
 }
@@ -176,23 +174,28 @@ main {
 }
 
 #preview-earth{
+  font-weight: 530;
   position: absolute;
   left: 13px;
-  top: 2px;
+  top: -1px;
 }
 
 #preview-leaf{
+  font-weight: 530;
   position: absolute;
   left: 13px;
-  top: 3px;
+
 }
 
 #preview-ocean {
+  font-weight: 530;
+  top: -2px;
   position: absolute;
   left: 13px;
 }
 
 #preview-lore {
+
   font-style: italic;
 }
 
@@ -381,7 +384,7 @@ footer, header {
     color: #eee;
     text-align: center;
     padding: 20px 0;
-    font-size: 0.8em;
+    font-size: 1em;
     margin-top: auto;
 }
 
