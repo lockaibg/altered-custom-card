@@ -77,14 +77,14 @@ function convertWithEmojis(texte, is_bonus) {
             if(texte.substring(i+2, i+3) === '}') {
                 if(orange) {
                     if(!is_bonus)
-                        retour = retour + `<img src="${emojis[key]}_o.png" alt="${key}" class="emoji">&nbsp;`;
+                        retour = retour + `<img src="${emojis[key]}_o.png" alt="${key}" class="emoji">`;
                     else 
-                        retour = retour + `<img src="${emojis[key]}_or.png" alt="${key}" class="emoji">&nbsp;`;
+                        retour = retour + `<img src="${emojis[key]}_or.png" alt="${key}" class="emoji">`;
                 }
                 else if(is_bonus || current_rarity === "unique") {
-                    retour = retour + `<img src="${emojis[key]}_b.png" alt="${key}" class="emoji">&nbsp;`;
+                    retour = retour + `<img src="${emojis[key]}_b.png" alt="${key}" class="emoji">`;
                 } else {
-                    retour = retour + `<img src="${emojis[key]}.png" alt="${key}" class="emoji">&nbsp;`;
+                    retour = retour + `<img src="${emojis[key]}.png" alt="${key}" class="emoji">`;
                 }
                 i+=2;
                 continue;
@@ -553,6 +553,10 @@ function updateRarity(rarity, img) {
     const type = document.getElementsByClassName("card-type")[0];
     const hand_cost = document.getElementsByClassName("card-hand-cost")[0];
     const reserve_cost = document.getElementsByClassName("card-reserve-cost")[0];
+
+    const leaf = document.getElementsByClassName("card-leaf")[0];
+    const earth = document.getElementsByClassName("card-earth")[0];
+    const ocean = document.getElementsByClassName("card-ocean")[0];
     switch(rarity) {    //TODO : emoji et texts en orange 
         case "rare":
             if(current_rarity === "commun" || current_rarity === "") {
@@ -572,6 +576,11 @@ function updateRarity(rarity, img) {
                 name.style.top = "29px"
                 type.style.top = "52px"
                 effect.style.color = "#000";
+            } 
+            if(document.getElementById("card-type").value === "character") {
+                leaf.style.top = "107px";
+                earth.style.top = "140px";
+                ocean.style.top = "173px";
             }
             break;
         case "commun":
@@ -593,6 +602,11 @@ function updateRarity(rarity, img) {
                 name.style.top = "30px"
                 type.style.top = "53px"
                 effect.style.color = "#000";
+            } 
+            if(document.getElementById("card-type").value === "character") {
+                leaf.style.top = "108px";
+                earth.style.top = "141px";
+                ocean.style.top = "174px";
             }
             break;
         case "unique": 
@@ -614,6 +628,9 @@ function updateRarity(rarity, img) {
             hand_cost.style.top = "17px";
             name.style.top = "27px"
             type.style.top = "51px"
+            leaf.style.top = "106px";
+            earth.style.top = "139px";
+            ocean.style.top = "172px";
             break;
     }
     updateLore(document.getElementById("card-lore").value);

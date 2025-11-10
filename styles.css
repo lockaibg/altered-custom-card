@@ -81,7 +81,7 @@ main {
 .emoji {
     width: 1em;
     height: 1em;
-    vertical-align: text-top;
+    vertical-align: middle;
 }
 
 .zone-effect {
@@ -155,21 +155,21 @@ main {
     text-shadow: 0 0 4px #000;
     filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
     font-size: 24px;
-    top: 142px; left: 28px; 
+    top: 141px; left: 27px; 
     z-index: 2;
 }
 .card-leaf { 
     text-shadow: 0 0 4px #000;
     filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
     font-size: 24px;
-    top: 109px; left: 28px; 
+    top: 108px; left: 27px; 
     z-index: 2;
 }
 .card-ocean { 
     text-shadow: 0 0 4px #000;
     filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
     font-size: 24px;
-    top: 175px; left: 28px; 
+    top: 174px; left: 27px; 
     z-index: 2;
 }
 
