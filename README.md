@@ -51,3 +51,4 @@ Function comments
 - if token : add a "commun" faction
 - add landmarks and reserve slots for heros
 - find a solution to have the shadow appear on the canvas
+- modify set logo
