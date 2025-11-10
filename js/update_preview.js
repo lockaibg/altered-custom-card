@@ -174,6 +174,8 @@ function updateCardType(value, img) {
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
     bool_augmented_text_area = false;
     updateEffect(document.getElementById("card-effect").value);
+    updateMana("HAND", document.getElementById("hand-cost").value);
+    updateMana("RESERVE", document.getElementById("reserve-cost").value);
 
     //update le listener sur cardbonus si il avait disparu a cause de hero ou de token
     if(document.getElementById("card-bonus")) {
@@ -318,7 +320,7 @@ function updateMana(type, value) {
             if(type === "HAND") {
                 document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "29px";
             } else {
-                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "57px";                
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "56px";                
             }
             break;
     }
