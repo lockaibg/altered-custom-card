@@ -307,7 +307,7 @@ function updateMana(type, value) {
             if(type === "HAND") {
                 document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "30px";
             } else {
-                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "58px";                
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "57px";                
             }
             break;
         case "10":
@@ -319,9 +319,9 @@ function updateMana(type, value) {
             break;
         default:
             if(type === "HAND") {
-                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "30px";
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "29px";
             } else {
-                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "58px";                
+                document.getElementsByClassName(`card-${type.toLowerCase()}-cost`)[0].style.left = "57px";                
             }
             break;
     }
@@ -566,11 +566,13 @@ function updateRarity(rarity, img) {
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
             }
-            reserve_cost.style.top = "41px";
-            hand_cost.style.top = "18px";
-            name.style.top = "30px"
-            type.style.top = "55px"
-            effect.style.color = "#000";
+            if(document.getElementById("card-type").value !== "permanent") {
+                reserve_cost.style.top = "41px";
+                hand_cost.style.top = "18px";
+                name.style.top = "29px"
+                type.style.top = "52px"
+                effect.style.color = "#000";
+            }
             break;
         case "commun":
             if(current_rarity === "rare") {
@@ -584,12 +586,14 @@ function updateRarity(rarity, img) {
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
 
-            }                
-            reserve_cost.style.top = "43px";
-            hand_cost.style.top = "19px";
-            name.style.top = "30px"
-            type.style.top = "55px"
-            effect.style.color = "#000";
+            }
+            if(document.getElementById("card-type").value !== "permanent") {    
+                reserve_cost.style.top = "43px";
+                hand_cost.style.top = "19px";
+                name.style.top = "30px"
+                type.style.top = "53px"
+                effect.style.color = "#000";
+            }
             break;
         case "unique": 
         
