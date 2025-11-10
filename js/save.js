@@ -1,4 +1,5 @@
 const SCALE_EXPORT = 4; // 2x
+const COLS = 6;
 
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("save-card").addEventListener("click", async (e) => {
