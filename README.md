@@ -47,7 +47,6 @@ Function comments
 
 ## TODO
 - modify image position
-- additional types
 - make the stat radio into buttons
 - if token : add a "commun" faction
 - add landmarks and reserve slots for heros
