@@ -20,6 +20,9 @@ Altered is a card game created by Equinoxe and published in 2024. As a good TCG 
 ```update_preview.js```
 > script updating the card preview according to the options checked in the form
 
+```save.js```
+> script used to download the card as png
+
 ## Syntax and Comments
 ### ID and class syntax
 ```^([a-z]+)([-][a-z]+)*$```
