@@ -63,11 +63,16 @@ function convertWithEmojis(texte, is_bonus) {
     for(let i = 0; i < texte.length; i++) {
         console.log("salut");
         if(texte[i] === '#') {
+            retour += emojis["#"]
             orange = true;
             continue;
         }
         else if(texte[i] === '*') {
+            retour += emojis["*"]
             orange = false;
+            continue;
+        } else if(texte[i] === '[' || texte[i] === ']') {
+            retour += emojis[texte[i]];
             continue;
         }
         else if(texte[i] === "{" && i + 2 < texte.length) {
@@ -699,7 +704,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const file = e.target.files[0];
             updateIllustration(file);
         });
-    }
+    }   
     document.querySelectorAll("textarea").forEach(t => {
         t.addEventListener("focus", () => {
             lastFocusedTextarea = t;
