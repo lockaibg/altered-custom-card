@@ -85,8 +85,9 @@ main {
 }
 
 .zone-effect {
+    line-height: 1.2em;
     position: absolute;
-    top: 370px;
+    top: 365px;
     left: 30px;
     right: 30px;
     color: #000;
@@ -96,6 +97,7 @@ main {
 }
 
 .card-bonus {
+    line-height: 1.2em;
     position: absolute;
     top: 433px;
     left: 25px;

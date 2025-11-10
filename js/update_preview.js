@@ -125,7 +125,7 @@ function updateCardType(value, img) {
     switch(value) {
         case "character":
             coordinates = findCoordonates(character);
-            effect.style.top = "360px";
+            effect.style.top = "365px";
             name.style.top = "30px";
             type.style.top = "53px";
             hand_cost.innerHTML = "0";
@@ -133,7 +133,7 @@ function updateCardType(value, img) {
             break;
         case "permanent":
             coordinates = findCoordonates(permanent);
-            effect.style.top = "360px";
+            effect.style.top = "365px";
             name.style.top = "291px";
             type.style.top = "314px";
             hand_cost.innerHTML = "0";
@@ -141,7 +141,7 @@ function updateCardType(value, img) {
             break;
         case "spell":
             coordinates = findCoordonates(spell);
-            effect.style.top = "360px";
+            effect.style.top = "365px";
             name.style.top = "30px";
             type.style.top = "53px";
             hand_cost.innerHTML = "0";
@@ -149,7 +149,7 @@ function updateCardType(value, img) {
             break;
         case "hero":
             coordinates = findCoordonates(hero);
-            effect.style.top = "348px";
+            effect.style.top = "360px";
             name.style.top = "36px";
             type.style.top = "62px";
             hand_cost.innerHTML = "";
@@ -158,7 +158,7 @@ function updateCardType(value, img) {
             break;
         case "token":
             coordinates = findCoordonates(token);
-            effect.style.top = "415px";
+            effect.style.top = "418px";
             name.style.top = "30px";
             type.style.top = "53px";
             hand_cost.innerHTML = "";
@@ -174,9 +174,10 @@ function updateCardType(value, img) {
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
     bool_augmented_text_area = false;
     updateEffect(document.getElementById("card-effect").value);
-    updateMana("HAND", document.getElementById("hand-cost").value);
-    updateMana("RESERVE", document.getElementById("reserve-cost").value);
-
+    if(document.getElementById("hand-cost")) {
+        updateMana("HAND", document.getElementById("hand-cost").value);
+        updateMana("RESERVE", document.getElementById("reserve-cost").value);
+    }
     //update le listener sur cardbonus si il avait disparu a cause de hero ou de token
     if(document.getElementById("card-bonus")) {
         document.getElementById("card-bonus").addEventListener("focus", (e) => {
@@ -205,7 +206,7 @@ function updateStats(stat, type) {
         document.getElementById("preview-leaf").innerHTML = stat;
         let els = document.getElementsByClassName("fond-stat")
         Array.prototype.forEach.call(els, function(el) {
-            el.innerHTML = `<img src="images/${el.id}_normal.png" alt="${el.id} background" height="31" id="${el.id}-background"/>`;
+            el.innerHTML = `<img src="images/${el.id}_zero.png" alt="${el.id} background" height="31" id="${el.id}-background"/>`;
         });  
     } else {
         var stat_preview = document.getElementById(`preview-${type}`);
@@ -268,15 +269,15 @@ function updateStats(stat, type) {
         
         if(earth_stat === 0) {
             modified["earth"] = true;
-            document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/>';
+            document.getElementById("earth").innerHTML = '<img src="images/earth_zero.png" alt="earth background" height="31" id="earth-background"/>';
         }
         if(leaf_stat === 0) {
             modified["leaf"] = true;
-            document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_zero.png" alt="leaf background" height="31" id="leaf-background"/>';
         }
         if(ocean_stat === 0) {
             modified["ocean"] = true;
-            document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/>';
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_zero.png" alt="ocean background" height="31" id="ocean-background"/>';
         }
         //si aucune des conditions précédentes
         if(!modified["earth"])
@@ -650,7 +651,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if(document.getElementById("card-type").value !== "token" && document.getElementById("card-type").value !== "character") 
         updateStats(0, "DELETE");
-
+    else
+        updateStats(0, "ALL");
     //quand un element est changé faire l'update
     if(document.getElementById("card-type")){
         document.getElementById("card-type").addEventListener("change", (e) => {
