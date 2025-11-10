@@ -22,7 +22,9 @@ const emojis = {
     "[": "<b>",
     "]": "</b>",
     "#": '<span style="color: #826841;" id="orange-text">',
-    "*": "</span>"
+    "*": "</span>",
+    "##": '<span style="color: #eccd8d;" id="orange-text">',
+    "**": "</span>"
 };
 
 const emojis_reversed = {
@@ -51,14 +53,19 @@ function convertWithEmojis(texte, is_bonus) {
     let retour = "";
     let orange = false;
     for(let i = 0; i < texte.length; i++) {
-        console.log("salut");
         if(texte[i] === '#') {
-            retour += emojis["#"]
+            if(!is_bonus)
+                retour += emojis["#"];
+            else
+                retour += emojis["##"];
             orange = true;
             continue;
         }
         else if(texte[i] === '*') {
-            retour += emojis["*"]
+            if(!is_bonus)
+                retour += emojis["*"];
+            else
+                retour += emojis["**"];
             orange = false;
             continue;
         } else if(texte[i] === '[' || texte[i] === ']') {
@@ -69,7 +76,10 @@ function convertWithEmojis(texte, is_bonus) {
             const key = texte.substring(i, i+3);
             if(texte.substring(i+2, i+3) === '}') {
                 if(orange) {
-                    retour = retour + `<img src="${emojis[key]}_o.png" alt="${key}" class="emoji">&nbsp;`;
+                    if(!is_bonus)
+                        retour = retour + `<img src="${emojis[key]}_o.png" alt="${key}" class="emoji">&nbsp;`;
+                    else 
+                        retour = retour + `<img src="${emojis[key]}_or.png" alt="${key}" class="emoji">&nbsp;`;
                 }
                 else if(is_bonus || current_rarity === "unique") {
                     retour = retour + `<img src="${emojis[key]}_b.png" alt="${key}" class="emoji">&nbsp;`;
@@ -710,28 +720,31 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 if(textarea) {
                     if(textarea.id !== "card-lore"){
+                        
                         const src_image = e.srcElement.alt || e.srcElement.children[0].alt;
-                        const text_to_insert = emojis_reversed[src_image];
+                        if(src_image === "infini" || src_image === "discard" || src_image === "orange" || textarea.id !== "card-bonus") {
+                            const text_to_insert = emojis_reversed[src_image];
 
-                        const start = textarea.selectionStart;
-                        const end = textarea.selectionEnd;
+                            const start = textarea.selectionStart;
+                            const end = textarea.selectionEnd;
 
-                        const before = textarea.value.substring(0, start);
-                        const after = textarea.value.substring(end);
-                        if(src_image === "orange") {
-                            const beetwin = textarea.value.substring(start, end);
+                            const before = textarea.value.substring(0, start);
+                            const after = textarea.value.substring(end);
+                            if(src_image === "orange") {
+                                const beetwin = textarea.value.substring(start, end);
 
-                            textarea.value = before + "#" + beetwin + "*" + after;
-                            textarea.selectionStart = textarea.selectionEnd = end + 2;
-                        } else {
-                            textarea.value = before + text_to_insert + after;
-                            textarea.selectionStart = textarea.selectionEnd = start + text_to_insert.length;
+                                textarea.value = before + "#" + beetwin + "*" + after;
+                                textarea.selectionStart = textarea.selectionEnd = end + 1;
+                            } else {
+                                textarea.value = before + text_to_insert + after;
+                                textarea.selectionStart = textarea.selectionEnd = start + text_to_insert.length;
+                            }
+                            updateEffect(document.getElementById("card-effect").value);
+                            updateLore(document.getElementById("card-lore").value);
+                            if(document.getElementById("card-bonus"))
+                                updateBonus(document.getElementById("card-bonus").value, img);
+                            textarea.focus();
                         }
-                        updateEffect(document.getElementById("card-effect").value);
-                        updateLore(document.getElementById("card-lore").value);
-                        if(document.getElementById("card-bonus"))
-                            updateBonus(document.getElementById("card-bonus").value, img);
-                        textarea.focus();
                     }
                 }
             });      
