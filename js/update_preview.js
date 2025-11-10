@@ -511,6 +511,7 @@ function updateIllustration(file) {
 function updateRarity(rarity, img) {
     const effect = document.getElementsByClassName("zone-effect")[0];
     const name = document.getElementsByClassName("card-name")[0];
+    const type = document.getElementsByClassName("card-type")[0];
     const hand_cost = document.getElementsByClassName("card-hand-cost")[0];
     const reserve_cost = document.getElementsByClassName("card-reserve-cost")[0];
     switch(rarity) {    //TODO : emoji et texts en orange 
@@ -528,6 +529,7 @@ function updateRarity(rarity, img) {
                 reserve_cost.style.top = "47px";
                 hand_cost.style.top = "24px";
                 name.style.top = "30px"
+                type.style.top = "55px"
             }
             effect.style.color = "#000";
             break;
@@ -545,6 +547,7 @@ function updateRarity(rarity, img) {
                 reserve_cost.style.top = "47px";
                 hand_cost.style.top = "24px";
                 name.style.top = "30px"
+                type.style.top = "55px"
             }
             effect.style.color = "#000";
             break;
@@ -566,6 +569,7 @@ function updateRarity(rarity, img) {
             reserve_cost.style.top = "45px";
             hand_cost.style.top = "22px";
             name.style.top = "28px"
+            type.style.top = "54px"
             break;
     }
     updateLore(document.getElementById("card-lore").value);

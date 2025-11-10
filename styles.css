@@ -97,11 +97,11 @@ main {
 
 .card-bonus {
     position: absolute;
-    top: 430px;
+    top: 433px;
     left: 25px;
     right: 20px;
     color: #FFF;
-    font-size: 14px;
+    font-size: 13px;
     height: 300px;
     z-index: 4;
 }
@@ -151,17 +151,23 @@ main {
     font-weight: bold;
     z-index: 4;
 }
-.card-earth { 
+.card-earth {
+    text-shadow: 0 0 4px #000;
+    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
     font-size: 24px;
     top: 142px; left: 28px; 
     z-index: 2;
 }
 .card-leaf { 
+    text-shadow: 0 0 4px #000;
+    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
     font-size: 24px;
     top: 109px; left: 28px; 
     z-index: 2;
 }
 .card-ocean { 
+    text-shadow: 0 0 4px #000;
+    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
     font-size: 24px;
     top: 175px; left: 28px; 
     z-index: 2;
