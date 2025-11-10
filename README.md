@@ -51,4 +51,4 @@ Function comments
 - make the stat radio into buttons
 - if token : add a "commun" faction
 - add landmarks and reserve slots for heros
-- update colors under stats but that's not programation and that's annoying to do
+- find a solution to have the shadow appear on the canvas
