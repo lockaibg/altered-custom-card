@@ -18,9 +18,21 @@ const emojis = {
     "{r}": "images/reserve2",
     "{h}": "images/hand",
     "{t}": "images/tap",
+    "{i}": "images/infini",
+    "{oo}": "images/ocean_o",
+    "{eo}": "images/earth_o",
+    "{lo}": "images/leaf_o",
+    "{do}": "images/discard_o",
+    "{fo}": "images/arrow_o",
+    "{ro}": "images/reserve2_o",
+    "{ho}": "images/hand_o",
+    "{to}": "images/tap_o",
+    "{io}": "images/infini_o",
     "\\n": "<br/>",
     "[": "<b>",
-    "]": "</b>"
+    "]": "</b>",
+    "#": '<span style="color: orange;" id="orange-text">',
+    "*": "</span>"
 };
 
 const emojis_reversed = {
@@ -31,7 +43,8 @@ const emojis_reversed = {
     "arrow": "{f}",
     "reserve": "{r}",
     "hand": "{h}",
-    "tap": "{t}"
+    "tap": "{t}",
+    "infini": "{i}"
 };
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
@@ -45,16 +58,34 @@ let lastFocusedTextarea = null; // valeur du dernier textarea focus
  * @return : texte_without_emoji
 */ 
 function convertWithEmojis(texte, is_bonus) {
-    let retour = texte;
-    for (const [key, value] of Object.entries(emojis)) {
-        if(value !== "<br/>" && value !== "<b>" && value !== "</b>" ) {
-            if(current_rarity !== "unique" && !is_bonus)
-                retour = retour.replaceAll(key, `<img src="${value}.png" alt="${key}" class="emoji">&nbsp;`);
-            else
-                retour = retour.replaceAll(key, `<img src="${value}_b.png" alt="${key}" class="emoji">&nbsp;`);
-        } else {
-            retour = retour.replaceAll(key, value);
-        } 
+    let retour = "";
+    let orange = false;
+    for(let i = 0; i < texte.length; i++) {
+        console.log("salut");
+        if(texte[i] === '#') {
+            orange = true;
+            continue;
+        }
+        else if(texte[i] === '*') {
+            orange = false;
+            continue;
+        }
+        else if(texte[i] === "{" && i + 2 < texte.length) {
+            const key = texte.substring(i, i+3);
+            if(texte.substring(i+2, i+3) === '}') {
+                if(orange) {
+                    retour = retour + `<img src="${emojis[key]}_o.png" alt="${key}" class="emoji">&nbsp;`;
+                }
+                else if(is_bonus || current_rarity === "unique") {
+                    retour = retour + `<img src="${emojis[key]}_b.png" alt="${key}" class="emoji">&nbsp;`;
+                } else {
+                    retour = retour + `<img src="${emojis[key]}.png" alt="${key}" class="emoji">&nbsp;`;
+                }
+                i+=2;
+                continue;
+            }
+        }
+        retour+=texte[i];
     }
     return retour;
 }
@@ -669,7 +700,6 @@ window.addEventListener("DOMContentLoaded", () => {
             updateIllustration(file);
         });
     }
-    //a tester : que se passe t il quand je fait disparaitre un des text area (token ou hero)
     document.querySelectorAll("textarea").forEach(t => {
         t.addEventListener("focus", () => {
             lastFocusedTextarea = t;
@@ -684,21 +714,24 @@ window.addEventListener("DOMContentLoaded", () => {
                 const textarea = lastFocusedTextarea;
 
                 if(textarea) {
-                    console.log(textarea);
                     if(textarea.id !== "card-lore"){
                         const src_image = e.srcElement.alt || e.srcElement.children[0].alt;
-                        const textToInsert = emojis_reversed[src_image];
+                        const text_to_insert = emojis_reversed[src_image];
 
                         const start = textarea.selectionStart;
                         const end = textarea.selectionEnd;
 
                         const before = textarea.value.substring(0, start);
                         const after = textarea.value.substring(end);
+                        if(src_image === "orange") {
+                            const beetwin = textarea.value.substring(start, end);
 
-                        textarea.value = before + textToInsert + after;
-
-                        textarea.selectionStart = textarea.selectionEnd = start + textToInsert.length;
-
+                            textarea.value = before + "#" + beetwin + "*" + after;
+                            textarea.selectionStart = textarea.selectionEnd = end + 2;
+                        } else {
+                            textarea.value = before + text_to_insert + after;
+                            textarea.selectionStart = textarea.selectionEnd = start + text_to_insert.length;
+                        }
                         updateEffect(document.getElementById("card-effect").value);
                         updateLore(document.getElementById("card-lore").value);
                         if(document.getElementById("card-bonus"))

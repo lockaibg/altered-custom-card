@@ -104,6 +104,12 @@
           <button type="button" id="button-tap">
             <img src="images/tap_o.png" alt="tap" width="20" height="20">
           </button>
+          <button type="button" id="button-infini">
+            <img src="images/infini_o.png" alt="infini" width="20" height="20">
+          </button>
+          <button type="button" id="button-orange">
+            <img src="images/orange.png" alt="orange" width="20" height="20">
+          </button>
         </div>
           <br/>
         <div class="field span-2">
