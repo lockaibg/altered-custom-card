@@ -608,7 +608,7 @@ function updateRarity(rarity, img) {
             reserve_cost.style.top = "45px";
             hand_cost.style.top = "22px";
             name.style.top = "28px"
-            type.style.top = "54px"
+            type.style.top = "53px"
             break;
     }
     updateLore(document.getElementById("card-lore").value);

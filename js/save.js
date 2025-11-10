@@ -1,48 +1,5 @@
-const COLS = 6;
-/*
-//solution 1 : compressed
-window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("save-card").addEventListener("click", async (e) => {
-    e.preventDefault();
-    const node = document.getElementById("card-preview");
+const SCALE_EXPORT = 4; // 2x
 
-
-    const canvas = await html2canvas(node, {
-      scale: 1,                
-      width: WIDTH,
-      height: HEIGHT,
-      backgroundColor: null,  
-      useCORS: true,
-      onclone: (doc) => {
-        const p = doc.getElementById("card-preview");
-        p.style.transform = "none";
-        p.style.filter = "none";
-      }
-    });
-
-
-    const out = document.createElement("canvas");
-    out.width = WIDTH;
-    out.height = HEIGHT;
-    const ctx = out.getContext("2d", { alpha: true });
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(canvas, 0, 0);
-
-
-    out.toBlob((blob) => {
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = (document.getElementById("name")?.value || "carte") + ".png";
-      a.click();
-      URL.revokeObjectURL(a.href);
-    }, "image/png");
-  });
-});
-
-*/
-
-//solution 2 : no compressed but blury, define each element of the canvasone by one before exporting
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("save-card").addEventListener("click", async (e) => {
     e.preventDefault();
@@ -50,37 +7,37 @@ window.addEventListener("DOMContentLoaded", () => {
     const node = document.getElementById("card-preview");
     const frameImg = document.getElementById("card-background");
 
-
+    // Attendre le chargement de toutes les <img> utilisées dans la carte
     await Promise.all(
       Array.from(node.querySelectorAll("img"))
         .filter(img => !img.complete)
         .map(img => new Promise(res => { img.onload = img.onerror = res; }))
     );
 
-
+    // Dimensions natives de la spritesheet
     const natW = frameImg.naturalWidth;
     const natH = frameImg.naturalHeight;
     const tileSrcW = natW / COLS;
     const s = WIDTH / tileSrcW;
 
+    // Indices de tuile
+    const rowIndex = current_position % COLS;
+    const colIndex = Math.floor(current_position / COLS);
 
-    const rowIndex = current_position % COLS;   
-    const colIndex = Math.floor(current_position / COLS); 
-
+    // Marqueurs pour onclone
     frameImg.dataset.exportScale = String(s);
     frameImg.dataset.exportRow = String(rowIndex);
     frameImg.dataset.exportCol = String(colIndex);
     frameImg.dataset.naturalWidth = String(natW);
     frameImg.dataset.naturalHeight = String(natH);
 
-    const SCALE_EXPORT = 1;
-
+    // Rendu @2x
     const canvas = await html2canvas(node, {
       useCORS: true,
       allowTaint: false,
       backgroundColor: null,
       scale: SCALE_EXPORT,
-      foreignObjectRendering: false,  
+      foreignObjectRendering: false,
       onclone: (doc) => {
         const preview = doc.getElementById("card-preview");
         preview.style.position = "relative";
@@ -91,9 +48,13 @@ window.addEventListener("DOMContentLoaded", () => {
         preview.style.filter = "none";
         preview.style.backdropFilter = "none";
 
+        // === Illustration en <img> (pas en background) ===
         const illu = doc.getElementById("preview-illustration");
         const illuWrap = illu?.parentElement;
+
         if (illuWrap && illu) {
+          // Important : ne PAS forcer width/height en CSS ailleurs
+          // On fixe ici la taille de DESSIN finale, pas un background-size.
           const natW = illu.naturalWidth;
           const natH = illu.naturalHeight;
 
@@ -106,15 +67,22 @@ window.addEventListener("DOMContentLoaded", () => {
           illuWrap.style.position = "absolute";
           illuWrap.style.inset = "0";
           illuWrap.style.zIndex = "1";
-          illuWrap.style.backgroundImage = `url("${illu.src}")`;
-          illuWrap.style.backgroundRepeat = "no-repeat";
-          illuWrap.style.backgroundSize = `${drawW}px ${drawH}px`; 
-          illuWrap.style.backgroundPosition = `${offsetX}px ${offsetY}px`;
-          illuWrap.style.imageRendering = "crisp-edges";
-          illuWrap.style.filter = "none";
-          illu.style.display = "none";   
+          illuWrap.style.overflow = "hidden";
+
+          illu.style.display = "block";          // on garde l’<img>
+          illu.style.position = "absolute";
+          illu.style.left = offsetX + "px";
+          illu.style.top = offsetY + "px";
+          illu.style.width = drawW + "px";       // taille de dessin finale
+          illu.style.height = drawH + "px";
+          illu.style.transform = "none";
+          illu.style.filter = "none";
+          illu.style.backdropFilter = "none";
+          illu.style.objectFit = "fill";         // pas de cover/contain ici
+          illu.style.imageRendering = "auto";    // évite 'pixelated'/'crisp-edges' pour photo
         }
 
+        // === Frame / spritesheet (inchangé) ===
         const frameImg = doc.getElementById("card-background");
         const frameWrap = doc.querySelector(".back-card");
         if (frameImg && frameWrap) {
@@ -134,12 +102,13 @@ window.addEventListener("DOMContentLoaded", () => {
           frameWrap.style.pointerEvents = "none";
           frameWrap.style.backgroundImage = `url("${frameImg.src}")`;
           frameWrap.style.backgroundRepeat = "no-repeat";
-          frameWrap.style.backgroundSize = `${bgW}px ${bgH}px`;   
-          frameWrap.style.backgroundPosition = `-${r*WIDTH}px -${c*HEIGHT}px`;  
+          frameWrap.style.backgroundSize = `${bgW}px ${bgH}px`;
+          frameWrap.style.backgroundPosition = `-${r * WIDTH}px -${c * HEIGHT}px`;
           frameWrap.style.imageRendering = "crisp-edges";
           frameImg.style.display = "none";
         }
 
+        // === Contenu texte au-dessus (inchangé) ===
         const content = doc.querySelector(".card-content");
         if (content) {
           content.style.position = "absolute";
@@ -157,21 +126,22 @@ window.addEventListener("DOMContentLoaded", () => {
           parent_icon.style.zIndex = "2";
         });
 
-        const toTopSelectors = [
-          ".card-name", ".zone-effect", ".card-bonus", ".card-type",
-          ".card-hand-cost", ".card-reserve-cost"
-        ];
-        toTopSelectors.forEach(sel => {
-          const nodes = content?.querySelectorAll(sel) || [];
-          nodes.forEach(n => {
-            n.style.position = "absolute";
-            n.style.zIndex = "4";
-            n.style.transform = "none";
-            n.style.filter = "none";
+        [".card-name", ".zone-effect", ".card-bonus", ".card-type", ".card-hand-cost", ".card-reserve-cost"]
+          .forEach(sel => {
+            const nodes = content?.querySelectorAll(sel) || [];
+            nodes.forEach(n => {
+              n.style.position = "absolute";
+              n.style.zIndex = "4";
+              n.style.transform = "none";
+              n.style.filter = "none";
+            });
           });
-        });
       }
     });
+
+    // (Optionnel) éviter l’aperçu géant sur la page après rendu
+    canvas.style.width = WIDTH + "px";
+    canvas.style.height = HEIGHT + "px";
 
     const suffix = SCALE_EXPORT === 1 ? "" : `@${SCALE_EXPORT}x`;
     canvas.toBlob((blob) => {
