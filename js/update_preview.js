@@ -175,33 +175,58 @@ function updateStats(stat, type) {
         const earth_stat = parseInt(document.getElementById("preview-earth").innerHTML);
         const ocean_stat = parseInt(document.getElementById("preview-ocean").innerHTML);
         const leaf_stat = parseInt(document.getElementById("preview-leaf").innerHTML);
+
         let modified = {
             "earth": false,
             "leaf": false,
             "ocean": false
         }
-        //un plus grand
-        if(earth_stat > ocean_stat && earth_stat > leaf_stat) {
-            modified["earth"] = true;
-            document.getElementById("earth").innerHTML = '<img src="images/earth_large.png" alt="earth background" height="31" id="earth-background"/>';
-        } else if(ocean_stat > earth_stat && ocean_stat > leaf_stat) {
-            modified["ocean"] = true;
-            document.getElementById("ocean").innerHTML = '<img src="images/ocean_large.png" alt="ocean background" height="31" id="ocean-background"/>';
-        } else if(leaf_stat > ocean_stat && leaf_stat > earth_stat) {
-            modified["leaf"] = true;
-            document.getElementById("leaf").innerHTML = '<img src="images/leaf_large.png" alt="leaf background" height="31" id="leaf-background"/>';
-        }
+        let smaller = false;
         //un plus petit
         if(earth_stat < ocean_stat && earth_stat < leaf_stat) {
             modified["earth"] = true;
+            smaller = true;
             document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/>';
         } else if(ocean_stat < earth_stat && ocean_stat < leaf_stat) {
             modified["ocean"] = true;
+            smaller = true;
             document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/>';
         } else if(leaf_stat < ocean_stat && leaf_stat < earth_stat) {
             modified["leaf"] = true;
+            smaller = true;
             document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
         }
+        //un plus grand
+        if(smaller) {
+            if(earth_stat > ocean_stat && earth_stat > leaf_stat) {
+                modified["earth"] = true;
+                document.getElementById("earth").innerHTML = '<img src="images/earth_large.png" alt="earth background" height="31" id="earth-background"/>';
+            } else if(ocean_stat > earth_stat && ocean_stat > leaf_stat) {
+                modified["ocean"] = true;
+                document.getElementById("ocean").innerHTML = '<img src="images/ocean_large.png" alt="ocean background" height="31" id="ocean-background"/>';
+            } else if(leaf_stat > ocean_stat && leaf_stat > earth_stat) {
+                modified["leaf"] = true;
+                document.getElementById("leaf").innerHTML = '<img src="images/leaf_large.png" alt="leaf background" height="31" id="leaf-background"/>';
+            }
+        } else {
+            if(earth_stat > ocean_stat && earth_stat > leaf_stat) {
+                modified["ocean"] = true;
+                modified["leaf"] = true;
+                document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
+                document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/>';
+            } else if(ocean_stat > earth_stat && ocean_stat > leaf_stat) {
+                modified["earth"] = true;
+                modified["leaf"] = true;
+                document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/>';
+                document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/>';
+            } else if(leaf_stat > ocean_stat && leaf_stat > earth_stat) {
+                modified["ocean"] = true;
+                modified["earth"] = true;
+                document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/>';
+                document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/>';
+            }
+        }
+        
         
         if(earth_stat === 0) {
             modified["earth"] = true;
@@ -485,7 +510,10 @@ function updateIllustration(file) {
 */
 function updateRarity(rarity, img) {
     const effect = document.getElementsByClassName("zone-effect")[0];
-    switch(rarity) {
+    const name = document.getElementsByClassName("card-name")[0];
+    const hand_cost = document.getElementsByClassName("card-hand-cost")[0];
+    const reserve_cost = document.getElementsByClassName("card-reserve-cost")[0];
+    switch(rarity) {    //TODO : emoji et texts en orange 
         case "rare":
             if(current_rarity === "commun" || current_rarity === "") {
                 current_rarity = "rare";
@@ -497,6 +525,9 @@ function updateRarity(rarity, img) {
                 coordinates = findCoordonates(current_position - 12);
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
+                reserve_cost.style.top = "47px";
+                hand_cost.style.top = "24px";
+                name.style.top = "30px"
             }
             effect.style.color = "#000";
             break;
@@ -511,11 +542,14 @@ function updateRarity(rarity, img) {
                 coordinates = findCoordonates(current_position - 26);
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
+                reserve_cost.style.top = "47px";
+                hand_cost.style.top = "24px";
+                name.style.top = "30px"
             }
             effect.style.color = "#000";
             break;
         case "unique": 
-        //TODO : emoji en orange
+        
             if(current_rarity === "rare") {
                 current_rarity = "unique";
                 effect.style.color = "#fff";
@@ -529,6 +563,9 @@ function updateRarity(rarity, img) {
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
             }
+            reserve_cost.style.top = "45px";
+            hand_cost.style.top = "22px";
+            name.style.top = "28px"
             break;
     }
     updateLore(document.getElementById("card-lore").value);

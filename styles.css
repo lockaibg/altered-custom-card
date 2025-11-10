@@ -137,7 +137,7 @@ main {
 }
 
 .card-hand-cost { 
-    top: 23px; 
+    top: 24px; 
     left: 29px; 
     font-family: "Work Sans";
     font-size: 28px;
@@ -145,7 +145,7 @@ main {
     z-index: 4;
 }
 .card-reserve-cost { 
-    top: 46px; left: 57px; 
+    top: 47px; left: 57px; 
     font-family: "Work Sans";
     font-size: 23px;
     font-weight: bold;
