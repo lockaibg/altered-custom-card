@@ -19,19 +19,9 @@ const emojis = {
     "{h}": "images/hand",
     "{t}": "images/tap",
     "{i}": "images/infini",
-    "{oo}": "images/ocean_o",
-    "{eo}": "images/earth_o",
-    "{lo}": "images/leaf_o",
-    "{do}": "images/discard_o",
-    "{fo}": "images/arrow_o",
-    "{ro}": "images/reserve2_o",
-    "{ho}": "images/hand_o",
-    "{to}": "images/tap_o",
-    "{io}": "images/infini_o",
-    "\\n": "<br/>",
     "[": "<b>",
     "]": "</b>",
-    "#": '<span style="color: orange;" id="orange-text">',
+    "#": '<span style="color: #826841;" id="orange-text">',
     "*": "</span>"
 };
 
@@ -348,7 +338,7 @@ function updateName(text) {
 */
 function updateEffect(text) {
     const zone = document.getElementById("preview-effect");
-    text_emoji = convertWithEmojis(text, false);
+    text_emoji = convertWithEmojis(text, false).replace(/\n/g, "<br>");
     zone.innerHTML = text_emoji;
     if(document.getElementById("card-type").value !== "hero" && document.getElementById("card-type").value !== "token") {
         const lore_zone = document.getElementById("preview-lore");
@@ -411,9 +401,9 @@ function updateLore(text) {
             zone.innerHTML = "";
         else {
             if(current_rarity !== "unique")
-                zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid black ;"></span><br/>' + text;
+                zone.innerHTML = ('<span style="display:inline-block; width:230px; border-bottom:1px solid black ;"></span><br/>' + text).replace(/\n/g, "<br>");
             else
-                 zone.innerHTML = '<span style="display:inline-block; width:230px; border-bottom:1px solid white ;"></span><br/>' + text;
+                 zone.innerHTML = ('<span style="display:inline-block; width:230px; border-bottom:1px solid white ;"></span><br/>' + text).replace(/\n/g, "<br>");
         }  
     }
     if(document.getElementById("card-type").value !== "hero" && document.getElementById("card-type").value !== "token") {
@@ -523,7 +513,7 @@ function updateBonus(text, img) {
     const zone = document.getElementById("preview-bonus");
     text_emoji = convertWithEmojis(text, true);
     if(zone)
-        zone.innerHTML = text_emoji;
+        zone.innerHTML = text_emoji.replace(/\n/g, "<br>");
     updateEffect(document.getElementById("card-effect").value);
 }
 
