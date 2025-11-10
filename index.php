@@ -79,6 +79,33 @@
           <input type="file" id="card-image" name="card-image" accept="image/*" />
         </div>
           <br/>
+        <div class="button-symbole">
+          <button type="button" id="button-leaf">
+            <img src="images/leaf_o.png" alt="leaf" width="20" height="20">
+          </button>
+          <button type="button" id="button-earth">
+            <img src="images/earth_o.png" alt="earth" width="20" height="20">
+          </button>
+          <button type="button" id="button-ocean">
+            <img src="images/ocean_o.png" alt="ocean" width="20" height="20">
+          </button>
+          <button type="button" id="button-discard">
+            <img src="images/discard_o.png" alt="discard" width="20" height="20">
+          </button>
+          <button type="button" id="button-arrow">
+            <img src="images/arrow_o.png" alt="arrow" width="20" height="20">
+          </button>
+          <button type="button" id="button-hand">
+            <img src="images/hand_o.png" alt="hand" width="20" height="20">
+          </button>
+          <button type="button" id="button-reserve">
+            <img src="images/reserve2_o.png" alt="reserve" width="20" height="20">
+          </button>
+          <button type="button" id="button-tap">
+            <img src="images/tap_o.png" alt="tap" width="20" height="20">
+          </button>
+        </div>
+          <br/>
         <div class="field span-2">
           <textarea id="card-effect" name="card-effect" placeholder="Effect"></textarea>
         </div>

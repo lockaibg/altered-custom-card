@@ -23,10 +23,22 @@ const emojis = {
     "]": "</b>"
 };
 
+const emojis_reversed = {
+    "ocean": "{o}",
+    "earth": "{e}",
+    "leaf": "{l}",
+    "discard": "{d}",
+    "arrow": "{f}",
+    "reserve": "{r}",
+    "hand": "{h}",
+    "tap": "{t}"
+};
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
 let current_rarity = ""; // la rareté actuelle
-let bool_augmented_text_area = false;
+let bool_augmented_text_area = false; // booléen pour savoir si la zone de text est grande ou pas
+
+let lastFocusedTextarea = null; // valeur du dernier textarea focus
 
 /* @param texte : texte a convertir en emojis
  * @ remplacer tout les {...} du texte par les emojis correspondants
@@ -36,7 +48,7 @@ function convertWithEmojis(texte, is_bonus) {
     let retour = texte;
     for (const [key, value] of Object.entries(emojis)) {
         if(value !== "<br/>" && value !== "<b>" && value !== "</b>" ) {
-            if(current_rarity !== "unique" || is_bonus)
+            if(current_rarity !== "unique" && !is_bonus)
                 retour = retour.replaceAll(key, `<img src="${value}.png" alt="${key}" class="emoji">&nbsp;`);
             else
                 retour = retour.replaceAll(key, `<img src="${value}_b.png" alt="${key}" class="emoji">&nbsp;`);
@@ -106,6 +118,7 @@ function updateCardType(value, img) {
             type.style.top = "62px";
             hand_cost.innerHTML = "";
             reserve_cost.innerHTML = "";
+            current_rarity = "commun";
             break;
         case "token":
             coordinates = findCoordonates(token);
@@ -114,6 +127,7 @@ function updateCardType(value, img) {
             type.style.top = "53px";
             hand_cost.innerHTML = "";
             reserve_cost.innerHTML = "";
+            current_rarity = "commun";
             break;
     }
     img.style.top = `-${coordinates.column_coordinates}px`;
@@ -124,6 +138,13 @@ function updateCardType(value, img) {
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
     bool_augmented_text_area = false;
     updateEffect(document.getElementById("card-effect").value);
+
+    //update le listener sur cardbonus si il avait disparu a cause de hero ou de token
+    if(document.getElementById("card-bonus")) {
+        document.getElementById("card-bonus").addEventListener("focus", (e) => {
+            lastFocusedTextarea = e.target;
+        });
+    }
 }
 
 /* @param stat : valeur de la stat (0-10)
@@ -494,7 +515,7 @@ function updateRarity(rarity, img) {
             effect.style.color = "#000";
             break;
         case "unique": 
-        //TODO : emoji en blanc et orange
+        //TODO : emoji en orange
             if(current_rarity === "rare") {
                 current_rarity = "unique";
                 effect.style.color = "#fff";
@@ -607,9 +628,44 @@ window.addEventListener("DOMContentLoaded", () => {
             updateIllustration(file);
         });
     }
-    /*if(document.getElementById("card-rarity")) {
-        document.getElementById("card-rarity").addEventListener("change", (e) => {
-            updateRarity(e.target.value, img);
+    //a tester : que se passe t il quand je fait disparaitre un des text area (token ou hero)
+    document.querySelectorAll("textarea").forEach(t => {
+        t.addEventListener("focus", () => {
+            lastFocusedTextarea = t;
         });
-    }*/
+    });
+    if(document.getElementsByClassName("button-symbole")) {
+        const els = document.getElementsByClassName("button-symbole")[0].children;
+        
+        Array.prototype.forEach.call(els, function(el) {
+            el.addEventListener("click", (e) => {
+
+                const textarea = lastFocusedTextarea;
+
+                if(textarea) {
+                    console.log(textarea);
+                    if(textarea.id !== "card-lore"){
+                        const src_image = e.srcElement.alt || e.srcElement.children[0].alt;
+                        const textToInsert = emojis_reversed[src_image];
+
+                        const start = textarea.selectionStart;
+                        const end = textarea.selectionEnd;
+
+                        const before = textarea.value.substring(0, start);
+                        const after = textarea.value.substring(end);
+
+                        textarea.value = before + textToInsert + after;
+
+                        textarea.selectionStart = textarea.selectionEnd = start + textToInsert.length;
+
+                        updateEffect(document.getElementById("card-effect").value);
+                        updateLore(document.getElementById("card-lore").value);
+                        if(document.getElementById("card-bonus"))
+                            updateBonus(document.getElementById("card-bonus").value, img);
+                        textarea.focus();
+                    }
+                }
+            });      
+        }); 
+    }
 });

@@ -348,3 +348,43 @@ footer, header {
     font-size: 0.8em;
     margin-top: auto;
 }
+
+.button-symbole {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.button-symbole button {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.button-symbole button:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.button-symbole button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.button-symbole img {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.4));
+}
