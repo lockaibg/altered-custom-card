@@ -46,9 +46,9 @@ Function comments
 > ```
 
 ## TODO
-- modify image position
-- make the stat radio into buttons
-- if token : add a "commun" faction
-- add landmarks and reserve slots for heros
-- find a solution to have the shadow appear on the canvas
-- modify set logo
+- modify image position / 2
+- make the stat radio into buttons / 1
+- if token : add a "commun" faction / 3
+- add landmarks and reserve slots for heros / 1
+- find a solution to have the shadow appear on the canvas / 4
+- modify set logo / 5
