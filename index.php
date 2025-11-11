@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-    <title>Altered customs - Creating...</title>
+
+    <meta name="description" content="Create your own altered cards ! Custom it to the end with every possible options then download it">
+    <meta name="keywords" content="Altered, custom cards, card maker, tcg, altered creator">
+    <meta name="author" content="github/lockaibg">
+    <meta name="robots" content="index, follow">
+
+    <title>Altered Custom Cards Creator</title>
+
     <link rel="stylesheet" href="styles.css">
 
     <link rel="stylesheet" href="https://use.typekit.net/wzf2bom.css">
@@ -23,8 +30,9 @@
 </head>
 <body>
   <header>
-    <p>I'm still working on this website, you can already create simple card if you want to try it. If you want to fork : github : https://github.com/lockaibg/altered-custom-card (find the TODO in the README)</p>
+    <p>I'm still working on this website, you can already create almost everything you want. If you want to fork : github : https://github.com/lockaibg/altered-custom-card (find the TODO in the README)</p>
   </header>
+  <h1>Altered Custom Cards</h1>
   <main>
     <div id="form">
       <form>

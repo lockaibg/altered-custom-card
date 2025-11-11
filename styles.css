@@ -427,3 +427,10 @@ footer, header {
   pointer-events: none;
   filter: drop-shadow(0 0 2px rgba(0,0,0,0.4));
 }
+
+h1 {
+  margin-left: auto;
+  margin-right: auto;
+  color: lightgray;
+  font-size: 3em;
+}
