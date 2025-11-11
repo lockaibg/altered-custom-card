@@ -439,3 +439,66 @@ h1 {
   color: lightgray;
   font-size: 3em;
 }
+
+/* --- Radios Earth / Leaf / Ocean stylisées comme des boutons --- */
+.radio-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.radio-group input[type="radio"] {
+  appearance: none;             /* retire le style par défaut */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  transition: background .2s, transform .1s, box-shadow .2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  text-align: center;
+  min-width: 40px;
+}
+
+/* effet survol et clic */
+.radio-group input[type="radio"]:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.radio-group input[type="radio"]:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+/* état sélectionné */
+.radio-group input[type="radio"]:checked {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #08111a;
+  border-color: transparent;
+  box-shadow: 0 0 8px rgba(142,240,255,0.4);
+}
+
+/* couleurs selon le type */
+[name="earth"] {
+  --accent: #c27e4d;
+  --accent-2: #d37e2e;
+}
+
+[name="leaf"] {
+  --accent: #9cd84b;
+  --accent-2: #91b14d;
+}
+
+[name="ocean"] {
+  --accent: #4ab5ff;
+  --accent-2: #6074a5;
+}

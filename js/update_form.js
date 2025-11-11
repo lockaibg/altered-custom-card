@@ -47,17 +47,17 @@ function addEventStats(container) {
     const leaf = container.querySelectorAll('[name="leaf"]');
     if(ocean) {
         ocean.forEach(el => { 
-            el.addEventListener("change", (e) => {
+            el.addEventListener("click", (e) => {
                 updateStats(e.target.value, 'ocean');
             });
         });
         earth.forEach(el => { 
-            el.addEventListener("change", (e) => {
+            el.addEventListener("click", (e) => {
                 updateStats(e.target.value, 'earth');
             });
         });
         leaf.forEach(el => { 
-            el.addEventListener("change", (e) => {
+            el.addEventListener("click", (e) => {
                 updateStats(e.target.value, 'leaf');
             });
         });
