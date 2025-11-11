@@ -71,7 +71,7 @@
             </select>
           </div>
       </div>
-        <!-- zone dynamique injectée par JS/PHP -->
+        <!-- zone dynamique injectée par JS -->
         <div class="field span-2" id="additional-type"></div>
         <div class="cost-div">
           <div class="field" id="hand-cost-div">
@@ -88,7 +88,11 @@
           <label for="card-image">Illustration :</label>
           <input type="file" id="card-image" name="card-image" accept="image/*" />
         </div>
-          <br/>
+        <br/>
+        <div class = "field span-2 illustration-position">
+          
+        </div>
+        <br/>
         <div class="button-symbole">
           <button type="button" id="button-leaf">
             <img src="images/leaf_o.png" alt="leaf" width="20" height="20">

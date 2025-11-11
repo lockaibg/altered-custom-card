@@ -1,7 +1,15 @@
 <?php
     if(isset($_GET["type"])) {
         if($_GET["type"] === "character") {
-            ?>
+            ?><div id="additional-token">
+                <br/>
+                <div class="token-type">
+                    <label for="token-type">Token&nbsp;type&nbsp;:&nbsp;</label>
+                    <select name="token-type" id="token-type">
+                        <option value="character">Character</option>
+                        <option value="landmark">Landmark</option>
+                    </select>
+                </div>
                 <br/><div class="radio-group">
                 <label for="leaf">Leaf</label>
                 
@@ -82,6 +90,16 @@
                 <label for="10">10</label>
                 </div>
             <?php
+        } else {
+            ?><div id="additional-token">
+                <br/>
+                <div class="token-type">
+                    <label for="token-type">Token&nbsp;type&nbsp;:&nbsp;</label>
+                    <select name="token-type" id="token-type">
+                        <option value="landmark">Landmark</option>
+                        <option value="character">Character</option>
+                    </select>
+                </div><?php
         }
     }
 ?>

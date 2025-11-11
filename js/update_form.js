@@ -29,7 +29,12 @@ function updateHeroToken(type) {
             });
         }
     }
-    
+    const fac = document.getElementById("card-faction");
+    if(type === "token") {
+        fac.innerHTML = '<option value="ordis">Ordis</option><option value="bravos">Bravos</option><option value="muna">Muna</option><option value="lyra">Lyra</option><option value="yzmir">Yzmir</option><option value="axiom">Axiom</option><option value="commun">Commun</option>';
+    } else {
+        fac.innerHTML = '<option value="ordis">Ordis</option><option value="bravos">Bravos</option><option value="muna">Muna</option><option value="lyra">Lyra</option><option value="yzmir">Yzmir</option><option value="axiom">Axiom</option>';
+    }
 }
 
 /* @param container : document.getElementById("additional-type");
@@ -67,6 +72,7 @@ function addEventToken(container) {
     const token = container.querySelector("#token-type");
     if(token) {
         token.addEventListener("change", (e) => {
+            updateTokenType();
             const token_type = e.target.value;
             if(token_type === "landmark") 
                 updateStats(0, "DELETE");
@@ -76,6 +82,8 @@ function addEventToken(container) {
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById("additional-token").innerHTML = html;
+                    addEventToken(document);
+                    addEventStats(document);
                 });
         });
     }

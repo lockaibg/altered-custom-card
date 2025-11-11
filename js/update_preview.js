@@ -41,6 +41,7 @@ const emojis_reversed = {
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
 let current_rarity = ""; // la rareté actuelle
+let current_faction = "ordis";
 let bool_augmented_text_area = false; // booléen pour savoir si la zone de text est grande ou pas
 
 let lastFocusedTextarea = null; // valeur du dernier textarea focus
@@ -116,6 +117,8 @@ function findCoordonates(position) {
  * @return : void
 */
 function updateCardType(value, img) {
+    const with_caps = value[0].toUpperCase() + value.substring(1); // majuscule
+    document.getElementById("preview-type").innerHTML = with_caps;
     var coordinates;
     const effect = document.getElementsByClassName("zone-effect")[0];
     const name = document.getElementsByClassName("card-name")[0];
@@ -133,7 +136,7 @@ function updateCardType(value, img) {
             break;
         case "permanent":
             coordinates = findCoordonates(permanent);
-            effect.style.top = "365px";
+            effect.style.top = "405px";
             name.style.top = "291px";
             type.style.top = "314px";
             hand_cost.innerHTML = "0";
@@ -164,12 +167,11 @@ function updateCardType(value, img) {
             hand_cost.innerHTML = "";
             reserve_cost.innerHTML = "";
             current_rarity = "commun";
+            document.getElementById("preview-type").innerHTML = with_caps + " Character";
             break;
     }
     img.style.top = `-${coordinates.column_coordinates}px`;
     img.style.left = `-${coordinates.row_coordinates}px`;
-    const with_caps = value[0].toUpperCase() + value.substring(1); // majuscule
-    document.getElementById("preview-type").innerHTML = with_caps;
     if(value === "hero") 
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
     bool_augmented_text_area = false;
@@ -178,6 +180,14 @@ function updateCardType(value, img) {
         updateMana("HAND", document.getElementById("hand-cost").value);
         updateMana("RESERVE", document.getElementById("reserve-cost").value);
     }
+
+    updateAdditionalType(document.getElementById("card-add-type").value);
+
+    if(current_faction !== "commun") 
+        updateFaction(img, current_faction);
+    else
+        updateFaction(img, "ordis");
+
     //update le listener sur cardbonus si il avait disparu a cause de hero ou de token
     if(document.getElementById("card-bonus")) {
         document.getElementById("card-bonus").addEventListener("focus", (e) => {
@@ -290,6 +300,49 @@ function updateStats(stat, type) {
     }
 }
 
+function updateTokenType() {
+    const name = document.getElementsByClassName("card-name")[0];
+    const type_preview = document.getElementsByClassName("card-type")[0];
+    const effect = document.getElementsByClassName("zone-effect")[0];
+
+    const img = document.getElementById("card-background");
+    const type = document.getElementById("token-type").value;
+    if(type === "landmark") {
+
+        document.getElementById("preview-type").innerHTML = "Token Landmark";
+        updateFaction(img, "commun");
+        document.getElementById("card-faction").value = "commun";
+
+        const coordinates = findCoordonates(1);
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+
+        effect.style.top = "405px";        
+        name.style.top = "291px";
+        type_preview.style.top = "314px";
+    } else if(current_faction === "commun") {
+        document.getElementById("preview-type").innerHTML = "Token Character";
+        const coordinates = findCoordonates(7);
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+
+        name.style.top = "30px";
+        type_preview.style.top = "53px";
+        effect.style.top = "418px";
+    } else {
+        document.getElementById("preview-type").innerHTML = "Token Character";
+        const coordinates = findCoordonates(13);
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+    
+        name.style.top = "30px";
+        type_preview.style.top = "53px";
+        effect.style.top = "418px";
+    }
+
+    updateAdditionalType(document.getElementById("card-add-type").value);    
+}
+
 /* @param type : "HAND" or "RESERVE" or "BOTH"
  * @param value : integer
  * @ : changer la valeure d'un ou des couts de mana sur la preview
@@ -333,7 +386,27 @@ function updateMana(type, value) {
  * @return : void
 */
 function updateFaction(img, faction) {
-    img.src = `images/${faction}.webp`;
+    if(document.getElementById("token-type")) {
+        if(document.getElementById("token-type").value === "landmark" && faction !== "commun") {
+            return;
+        }
+    }
+    current_faction = faction;
+    console.log(document.getElementById("card-type").value);
+
+    if(faction === "commun") {
+        const coordinates = findCoordonates(7);
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+        img.src = `images/${faction}.webp`;
+    } else if(document.getElementById("card-type").value === "token") {
+        const coordinates = findCoordonates(token);
+        img.style.top = `-${coordinates.column_coordinates}px`;
+        img.style.left = `-${coordinates.row_coordinates}px`;
+        img.src = `images/${faction}.webp`;
+    } else {
+        img.src = `images/${faction}.webp`;
+    }
 }
 
 /* @param text : text a mettre a jour
@@ -637,9 +710,17 @@ function updateRarity(rarity, img) {
     document.getElementById("preview-effect").innerHTML = convertWithEmojis(document.getElementById("card-effect").value, false);
 }
 
+/* @param text : user's entry
+ * @ : modify additional types for the card
+ * @return : void
+*/
 function updateAdditionalType(text) {
-    const type = document.getElementById("card-type").value[0].toUpperCase() + document.getElementById("card-type").value.substring(1);
+    let type = document.getElementById("card-type").value[0].toUpperCase() + document.getElementById("card-type").value.substring(1);
     const value = document.getElementById("preview-type");
+    if(document.getElementById("card-type").value === "token") {
+        if(document.getElementById("token-type"))
+            type += ' ' + document.getElementById("token-type").value[0].toUpperCase() + document.getElementById("token-type").value.substring(1);
+    }
     if(text !== "")
         value.innerHTML = type + " - " + text;
     else 
