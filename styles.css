@@ -499,3 +499,7 @@ h1 {
   --accent: #3d8cc5;
   --accent-2: #6074a5;
 }
+
+.number-select {
+  color: #826841;
+}

@@ -124,7 +124,7 @@
           <div class="number-select">
             <!-- ton vrai select, utilisé par le JS -->
             <select id="number" name="number">
-              <option value="x">x</option>
+              <option value="x">X</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
