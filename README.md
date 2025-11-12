@@ -48,5 +48,3 @@ Function comments
 ## TODO
 - modify image position / 1
 - add landmarks and reserve slots for heros / 2
-- find a solution to have the shadow appear on the canvas / 3
-- modify set logo / 4
