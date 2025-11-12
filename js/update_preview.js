@@ -19,6 +19,16 @@ const emojis = {
     "{h}": "images/hand",
     "{t}": "images/tap",
     "{i}": "images/infini",
+    "{x}": "images/chiffres/x",
+    "{1}": "images/chiffres/one",
+    "{2}": "images/chiffres/two",
+    "{3}": "images/chiffres/three",
+    "{4}": "images/chiffres/four",
+    "{5}": "images/chiffres/five",
+    "{6}": "images/chiffres/six",
+    "{7}": "images/chiffres/seven",
+    "{8}": "images/chiffres/eight",
+    "{9}": "images/chiffres/nine",
     "[": "<b>",
     "]": "</b>",
     "#": '<span style="color: #826841;" id="orange-text">',
@@ -36,8 +46,18 @@ const emojis_reversed = {
     "reserve": "{r}",
     "hand": "{h}",
     "tap": "{t}",
-    "infini": "{i}"
-};
+    "infini": "{i}",
+    "x": "{x}",
+    "1": "{1}",
+    "2": "{2}",
+    "3": "{3}",
+    "4": "{4}",
+    "5": "{5}",
+    "6": "{6}",
+    "7": "{7}",
+    "8": "{8}",
+    "9": "{9}"
+}
 let bool_bonus = false; // true si la case de bonus est active false sinon
 let current_position; // la position actuelle de la carte sur la spritesheet
 let current_rarity = ""; // la rareté actuelle
@@ -834,13 +854,22 @@ window.addEventListener("DOMContentLoaded", () => {
         Array.prototype.forEach.call(els, function(el) {
             el.addEventListener("click", (e) => {
 
+                if(e.target.id) {
+                    if(e.target.id === "number")
+                        return;
+                }
+                console.log(e.target);
                 const textarea = lastFocusedTextarea;
 
                 if(textarea) {
                     if(textarea.id !== "card-lore"){
-                        
-                        const src_image = e.srcElement.alt || e.srcElement.children[0].alt;
-                        if(src_image === "infini" || src_image === "discard" || src_image === "orange" || textarea.id !== "card-bonus") {
+                        let src_image;
+                        if(e.srcElement.children[0])
+                            src_image = e.srcElement.alt || e.srcElement.children[0].alt;
+                        else
+                            src_image = e.target.value;
+                        console.log(src_image);
+                        if(src_image === "infini" || src_image === "discard" || src_image === "orange" || textarea.id !== "card-bonus" || src_image === "x" || src_image === "1" || src_image === "2" || src_image === "3" || src_image === "4" || src_image === "5" || src_image === "6" || src_image === "7" || src_image === "8" || src_image === "9") {
                             const text_to_insert = emojis_reversed[src_image];
 
                             const start = textarea.selectionStart;

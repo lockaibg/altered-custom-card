@@ -121,6 +121,22 @@
           <button type="button" id="button-infini">
             <img src="images/infini_o.png" alt="infini" width="20" height="20">
           </button>
+          <div class="number-select">
+            <!-- ton vrai select, utilisé par le JS -->
+            <select id="number" name="number">
+              <option value="x">x</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+
           <button type="button" id="button-orange">
             <img src="images/orange.png" alt="orange" width="20" height="20">
           </button>
