@@ -1,6 +1,6 @@
 //taille d'une carte
 const WIDTH = 372;
-const HEIGHT = 520;
+const HEIGHT = 519;
 
 //position de la premiere carte de chaque type
 const character = 2;
@@ -145,6 +145,8 @@ function updateCardType(value, img) {
     const type = document.getElementsByClassName("card-type")[0];
     const hand_cost = document.getElementById("preview-hand-cost");
     const reserve_cost = document.getElementById("preview-reserve-cost");
+
+    const infos = document.getElementById("preview-permanent-info");
     switch(value) {
         case "character":
             coordinates = findCoordonates(character);
@@ -153,6 +155,7 @@ function updateCardType(value, img) {
             type.style.top = "53px";
             hand_cost.innerHTML = "0";
             reserve_cost.innerHTML = "0";
+            infos.innerHTML = "";
             break;
         case "permanent":
             coordinates = findCoordonates(permanent);
@@ -161,6 +164,7 @@ function updateCardType(value, img) {
             type.style.top = "314px";
             hand_cost.innerHTML = "0";
             reserve_cost.innerHTML = "0";
+            infos.innerHTML = "(Play me  in your Landmarks.  I can't gain Fleeting.)"
             break;
         case "spell":
             coordinates = findCoordonates(spell);
@@ -169,6 +173,7 @@ function updateCardType(value, img) {
             type.style.top = "53px";
             hand_cost.innerHTML = "0";
             reserve_cost.innerHTML = "0";
+            infos.innerHTML = "";
             break;
         case "hero":
             coordinates = findCoordonates(hero);
@@ -178,6 +183,7 @@ function updateCardType(value, img) {
             hand_cost.innerHTML = "";
             reserve_cost.innerHTML = "";
             current_rarity = "commun";
+            infos.innerHTML = "";
             break;
         case "token":
             coordinates = findCoordonates(token);
@@ -188,6 +194,7 @@ function updateCardType(value, img) {
             reserve_cost.innerHTML = "";
             current_rarity = "commun";
             document.getElementById("preview-type").innerHTML = with_caps + " Character";
+            infos.innerHTML = "";
             break;
     }
     img.style.top = `-${coordinates.column_coordinates}px`;
@@ -653,11 +660,18 @@ function updateRarity(rarity, img) {
     const leaf = document.getElementsByClassName("card-leaf")[0];
     const earth = document.getElementsByClassName("card-earth")[0];
     const ocean = document.getElementsByClassName("card-ocean")[0];
-    switch(rarity) {    //TODO : emoji et texts en orange 
+    switch(rarity) {
         case "rare":
             if(current_rarity === "commun" || current_rarity === "") {
                 current_rarity = "rare";
-                coordinates = findCoordonates(current_position + 14);
+                if(document.getElementById("permanent-type")) {
+                    if(document.getElementById("permanent-type").value === "expedition")
+                        coordinates = findCoordonates(current_position + 4);
+                    else
+                        coordinates = findCoordonates(current_position + 14);
+                } else {
+                    coordinates = findCoordonates(current_position + 14);
+                }
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
             } else if(current_rarity === "unique") {
@@ -668,28 +682,35 @@ function updateRarity(rarity, img) {
             }                
             
             if(document.getElementById("card-type").value !== "permanent") {
-                name.style.top = "29px"
-                type.style.top = "52px"
-                reserve_cost.style.top = "41px";
-                hand_cost.style.top = "18px";
+                name.style.top = "31px"
+                type.style.top = "54px"
+                reserve_cost.style.top = "43px";
+                hand_cost.style.top = "20px";
                 effect.style.color = "#000";
             }  else {
-                reserve_cost.style.top = "39px";
-                hand_cost.style.top = "16px";
-                type.style.top = "312px";
-                name.style.top = "289px";
+                reserve_cost.style.top = "41px";
+                hand_cost.style.top = "18px";
+                type.style.top = "314px";
+                name.style.top = "291px";
                 effect.style.color = "#000";
             }
             if(document.getElementById("card-type").value === "character") {
-                leaf.style.top = "107px";
-                earth.style.top = "140px";
-                ocean.style.top = "173px";
+                leaf.style.top = "109px";
+                earth.style.top = "142px";
+                ocean.style.top = "175px";
             }
             break;
         case "commun":
             if(current_rarity === "rare") {
                 current_rarity = "commun";
-                coordinates = findCoordonates(current_position - 14);
+                if(document.getElementById("permanent-type")) {
+                    if(document.getElementById("permanent-type").value === "expedition")
+                        coordinates = findCoordonates(current_position - 4);
+                    else
+                        coordinates = findCoordonates(current_position - 14);
+                } else {
+                    coordinates = findCoordonates(current_position - 14);
+                }
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
             } else if(current_rarity === "unique") {
@@ -703,8 +724,8 @@ function updateRarity(rarity, img) {
             if(document.getElementById("card-type").value !== "permanent") {    
                 name.style.top = "30px"
                 type.style.top = "53px"
-                reserve_cost.style.top = "43px";
-                hand_cost.style.top = "19px";
+                reserve_cost.style.top = "42px";
+                hand_cost.style.top = "18px";
                 effect.style.color = "#000";
             } else {
                 reserve_cost.style.top = "41px";
@@ -734,13 +755,13 @@ function updateRarity(rarity, img) {
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
             }
-            reserve_cost.style.top = "40px";
-            hand_cost.style.top = "17px";
-            name.style.top = "27px"
-            type.style.top = "51px"
-            leaf.style.top = "106px";
-            earth.style.top = "139px";
-            ocean.style.top = "172px";
+            reserve_cost.style.top = "43px";
+            hand_cost.style.top = "20px";
+            name.style.top = "30px"
+            type.style.top = "54px"
+            leaf.style.top = "110px";
+            earth.style.top = "143px";
+            ocean.style.top = "176px";
             break;
     }
     updateLore(document.getElementById("card-lore").value);

@@ -86,6 +86,18 @@ main {
     top: -2px;
 }
 
+.card-permanent-info {
+  color: #000;
+  top: 370px; /*363*/
+  left: 65px;
+  position: absolute;
+  z-index: 4;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1em;
+}
+
 .zone-effect {
     line-height: 1.2em;
     position: absolute;
@@ -267,7 +279,7 @@ textarea{
   gap: 2%;
 }
 
-#card-type {
+#card-type, .additional-permanent {
   width: 30%;
 }
 

@@ -1,3 +1,5 @@
+const permanent_expe = 32;
+
 /* @param type : type de carte
  * @ : si hero ou token suprimer les cout de main et reserve, ainsi que l'effet bonus
  * @return : void
@@ -118,6 +120,33 @@ window.addEventListener("DOMContentLoaded", () => {
     //supprimer les éléments pour hero et token
     updateHeroToken(type);
     updateRarityForm(type);
+  
+    if(type === "permanent") {
+        const add = document.getElementsByClassName("additional-permanent")[0];
+        add.innerHTML = '<select id="permanent-type" name="permanent-type"><option value="landmark">Landmarks</option><option value="expedition">Expedition</option></select>';
+        add.addEventListener("change", (e) => {
+            const type_perma = e.target.value;
+            const infos = document.getElementById("preview-permanent-info");
+            let coordinates
+            if(type_perma === "landmark") {
+                infos.innerHTML = "(Play me  in your Landmarks.  I can't gain Fleeting.)";
+                document.getElementsByClassName("card-permanent-info")[0].style.top = "370px";
+                coordinates = findCoordonates(permanent);
+            }
+            else if(type_perma === "expedition") {
+                infos.innerHTML = "(Play me  in one of your Expeditions. If my Expedition moves forward, I go to Reserve during Rest.)";
+                document.getElementsByClassName("card-permanent-info")[0].style.top = "363px";
+                coordinates = findCoordonates(permanent_expe);
+            }
+            const img = document.getElementById("card-background");
+            img.style.top = `-${coordinates.column_coordinates}px`;
+            img.style.left = `-${coordinates.row_coordinates}px`;
+            current_rarity = "commun";
+            updateRarity(document.getElementById("card-rarity").value, img);
+        });
+    } else {
+        document.getElementsByClassName("additional-permanent")[0].innerHTML = "";
+    }
 
     //vérification du type sélectionné au load de la page
     fetch(`update.php?type=${type}`)
@@ -134,10 +163,40 @@ window.addEventListener("DOMContentLoaded", () => {
     
     //quand card-type est modifié on ajoute ou supprime le php correspondant au type sélectionné
     document.getElementById("card-type").addEventListener("change", (e) => {
+        
         type = e.target.value;
+
+        if(type === "permanent") {
+            const add = document.getElementsByClassName("additional-permanent")[0];
+            add.innerHTML = '<select id="permanent-type" name="permanent-type"><option value="landmark">Landmarks</option><option value="expedition">Expedition</option></select>';
+            add.addEventListener("change", (e) => {
+                const type_perma = e.target.value;
+                const infos = document.getElementById("preview-permanent-info");
+                let coordinates
+                if(type_perma === "landmark") {
+                    infos.innerHTML = "(Play me  in your Landmarks.  I can't gain Fleeting.)";
+                    document.getElementsByClassName("card-permanent-info")[0].style.top = "370px";
+                    coordinates = findCoordonates(permanent);
+                }
+                else if(type_perma === "expedition") {
+                    infos.innerHTML = "(Play me  in one of your Expeditions. If my Expedition moves forward, I go to Reserve during Rest.)";
+                    document.getElementsByClassName("card-permanent-info")[0].style.top = "363px";
+                    coordinates = findCoordonates(permanent_expe);
+                }
+                const img = document.getElementById("card-background");
+                img.style.top = `-${coordinates.column_coordinates}px`;
+                img.style.left = `-${coordinates.row_coordinates}px`;
+                current_rarity = "commun";
+                updateRarity(document.getElementById("card-rarity").value, img);
+            });
+        } else {
+            document.getElementsByClassName("additional-permanent")[0].innerHTML = "";
+        }
+        
         //supprimer les éléments pour hero
         updateHeroToken(type);
         updateRarityForm(type);
+
 
         fetch(`update.php?type=${type}`)
             .then(response => response.text())
@@ -151,4 +210,5 @@ window.addEventListener("DOMContentLoaded", () => {
                 addEventStats(container);
             });
     });
+
 });

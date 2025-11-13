@@ -62,6 +62,12 @@
             <option value="character">Character</option>
           </select>
           <input type="text" id="card-add-type" name="card-add-type" placeholder="Additional type"/>
+          <div class="additional-permanent">
+            <select id="permanent-type" name="permanent-type">
+              <option value="landmark">Landmarks</option>
+              <option value="expedition">expedition</option>
+            </select>
+          </div>
         </div>
         <br/>
         <div class="selects">
@@ -199,6 +205,7 @@
 
       <div class="card-content">
         <div class="card-name"><span id="preview-name">Nom de la carte</span></div>
+        <div class="card-permanent-info"><span id="preview-permanent-info"></span></div>
         <div class="zone-effect">
           <div class="card-effect"><span id="preview-effect">Texte d’effet</span></div>
           <div class="card-lore"><span id="preview-lore">Texte de Lore</span></div>
