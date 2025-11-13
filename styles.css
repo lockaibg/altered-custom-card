@@ -17,6 +17,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 30px;
 }
 #card-preview {
     position: relative;
@@ -390,6 +391,37 @@ footer, header {
     margin-top: auto;
 }
 
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+footer ul li img {
+  vertical-align: middle;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
+
+footer ul li a {
+  color: #8ef0ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .2s ease;
+}
+
+footer ul li a:hover {
+  color: #6ea8ff;
+}
+
+
 .button-symbole {
   display: flex;
   flex-wrap: wrap;
@@ -503,3 +535,4 @@ h1 {
 .number-select {
   color: #826841;
 }
+

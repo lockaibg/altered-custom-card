@@ -16,8 +16,9 @@
     <link rel="stylesheet" href="https://use.typekit.net/wzf2bom.css">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="images/favicon.png" sizes="260x260">
+
 
     <!--script pour mettre a jour le formulaire-->
     <script src="js/update_form.js"></script>
@@ -27,10 +28,21 @@
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="js/save.js"></script>
 
+    <!-- Données structurées pour le logo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://altered-custom-card.com",
+      "logo": "https://altered-custom-card.com/images/favicon.png",
+      "name": "Altered Custom Cards"
+    }
+    </script>
+
 </head>
 <body>
   <header>
-    <p>I'm still working on this website, you can already create almost everything you want. If you want to fork : github : https://github.com/lockaibg/altered-custom-card (find the TODO in the README)</p>
+    <p>I'm still working on this website, you can already create almost everything you want.</p>
   </header>
   <h1>Altered Custom Cards</h1>
   <main>
@@ -198,6 +210,10 @@
   </main>
   <footer>
     <p>The data presented on this site comes from public sources belonging to Equinox. This site has no official connection with this company.</p>
+    <ul>
+      <li><img src="https://github.com/favicon.ico" alt="github logo" height="16">&nbsp;<a href="https://github.com/lockaibg/altered-custom-card">GitHub</a></li>
+      <li><img src="images/discord.png" alt="discord logo" height="14">&nbsp;<a href="https://discordapp.com/users/517005573124784141">Discord</a></li>
+    </ul>
   </footer>
 </body>
 
