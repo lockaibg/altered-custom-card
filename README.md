@@ -47,6 +47,5 @@ Function comments
 
 ## TODO
 - permanent type / 1
-- modify image position / 2
 - add landmarks and reserve slots for heros / 3
 - token permanent for all factions
