@@ -320,6 +320,10 @@ function updateStats(stat, type) {
     }
 }
 
+/* @param 
+ * @ : utilisé pour update le type de tokens
+ * @return : void
+*/
 function updateTokenType() {
     const name = document.getElementsByClassName("card-name")[0];
     const type_preview = document.getElementsByClassName("card-type")[0];
@@ -760,6 +764,37 @@ function updateAdditionalType(text) {
         value.innerHTML = type;
 }
 
+
+function applyIllustrationTransform() {
+    const illu = document.getElementById("preview-illustration");
+    if (!illu) return;
+
+    const zoom_input = document.getElementById("illu-zoom");
+    const offset_x_input = document.getElementById("illu-offset-x");
+    const offset_y_input = document.getElementById("illu-offset-y");
+
+    const scale = zoom_input ? parseFloat(zoom_input.value) / 100 : 1;
+    const offset_x = offset_x_input ? parseInt(offset_x_input.value, 10) : 0;
+    const offset_y = offset_y_input ? parseInt(offset_y_input.value, 10) : 0;
+
+    // translate en px puis scale (comme ça les déplacements restent "réels")
+    illu.style.transform = `translate(${offset_x}px, ${offset_y}px) scale(${scale})`;
+}
+
+
+function updateIllustration(file) {
+    const img = document.getElementById("preview-illustration");
+    if (!file || !img) return;
+    const url = URL.createObjectURL(file);
+    img.src = url;
+
+    // Quand on change d'image, on réapplique la transform actuelle
+    img.onload = () => {
+        applyIllustrationTransform();
+    };
+}
+
+
 window.addEventListener("DOMContentLoaded", () => {
     const img = document.getElementById("card-background");
 
@@ -777,6 +812,7 @@ window.addEventListener("DOMContentLoaded", () => {
     updateEffect(document.getElementById("card-effect").value);
     updateLore(document.getElementById("card-lore").value);
     updateAdditionalType(document.getElementById("card-add-type").value);
+    applyIllustrationTransform();
 
     if(document.getElementById("card-bonus"))
         updateBonus(document.getElementById("card-bonus").value, img);
@@ -882,7 +918,7 @@ window.addEventListener("DOMContentLoaded", () => {
                             src_image = e.target.value;
                         if(src_image === "infini" || src_image === "discard" || src_image === "orange" || textarea.id !== "card-bonus" || src_image === "x" || src_image === "1" || src_image === "2" || src_image === "3" || src_image === "4" || src_image === "5" || src_image === "6" || src_image === "7" || src_image === "8" || src_image === "9") {
                             const text_to_insert = emojis_reversed[src_image];
-
+                            console.log(text_to_insert);
                             const start = textarea.selectionStart;
                             const end = textarea.selectionEnd;
 
@@ -912,5 +948,19 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("card-add-type").addEventListener("input", (e) => {
             updateAdditionalType(e.target.value);
         });
+    }
+
+    const zoomInput = document.getElementById("illu-zoom");
+    const offsetXInput = document.getElementById("illu-offset-x");
+    const offsetYInput = document.getElementById("illu-offset-y");
+
+    if (zoomInput) {
+        zoomInput.addEventListener("input", applyIllustrationTransform);
+    }
+    if (offsetXInput) {
+        offsetXInput.addEventListener("input", applyIllustrationTransform);
+    }
+    if (offsetYInput) {
+        offsetYInput.addEventListener("input", applyIllustrationTransform);
     }
 });

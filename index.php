@@ -100,6 +100,21 @@
           <label for="card-image">Illustration :</label>
           <input type="file" id="card-image" name="card-image" accept="image/*" />
         </div>
+        <div class="illu-controls">
+          <div class="illus">
+            <label for="illu-zoom">Illustration size</label>
+            <input type="range" id="illu-zoom" name="illu-zoom" min="50" max="200" value="100">
+          </div>
+          <div class="illus">
+            <label for="illu-offset-x">X transformation</label>
+            <input type="range" id="illu-offset-x" name="illu-offset-x" min="-150" max="150" value="0">
+          </div>
+          <div class="illus">
+            <label for="illu-offset-y">Y transformation</label>
+            <input type="range" id="illu-offset-y" name="illu-offset-y" min="-150" max="150" value="0">
+          </div>
+        </div>
+
         <br/>
         <div class = "field span-2 illustration-position">
           
