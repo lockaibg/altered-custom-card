@@ -202,6 +202,7 @@ function updateCardType(value, img) {
     if(value === "hero") 
         document.getElementById("preview-type").innerHTML = "Héros " + document.getElementById("card-faction").value[0].toUpperCase() + document.getElementById("card-faction").value.substring(1);
     bool_augmented_text_area = false;
+    updateAdditionalType();
     updateEffect(document.getElementById("card-effect").value);
     if(document.getElementById("hand-cost")) {
         updateMana("HAND", document.getElementById("hand-cost").value);
@@ -459,10 +460,17 @@ function updateEffect(text) {
     if(document.getElementById("card-type").value !== "hero" && document.getElementById("card-type").value !== "token") {
         const lore_zone = document.getElementById("preview-lore");
         let max_ligne
-        if(!bool_bonus) 
-            max_ligne = 120;
-        else
-            max_ligne = 98;
+        if(document.getElementById("card-type").value === "permanent") {
+            if(!bool_bonus) 
+                max_ligne = 80;
+            else
+                max_ligne = 60;
+        } else {
+            if(!bool_bonus) 
+                max_ligne = 120;
+            else
+                max_ligne = 98;
+        }
         if(zone.offsetHeight + lore_zone.offsetHeight > max_ligne && !bool_augmented_text_area) {
             const img = document.getElementById("card-background");
             coordinates = findCoordonates(current_position + 1);
@@ -477,10 +485,19 @@ function updateEffect(text) {
             if(document.getElementById("card-type").value === "permanent") {
                 const name = document.getElementsByClassName("card-name")[0];
                 const type = document.getElementsByClassName("card-type")[0];
+                const infos = document.getElementsByClassName("card-permanent-info")[0];
+                const current_top_info = parseInt(window.getComputedStyle(infos).top);
                 const name_current_top = parseInt(window.getComputedStyle(name).top);
                 const type_current_top = parseInt(window.getComputedStyle(type).top);
-                name.style.top = (name_current_top - 35) + "px";
-                type.style.top = (type_current_top - 35) + "px";
+                if(!bool_bonus) {
+                    name.style.top = (name_current_top - 37) + "px";
+                    type.style.top = (type_current_top - 37) + "px";
+                    infos.style.top = (current_top_info - 43) + "px";
+                } else {
+                    name.style.top = (name_current_top - 39) + "px";
+                    type.style.top = (type_current_top - 39) + "px";
+                    infos.style.top = (current_top_info - 39) + "px";
+                }
             }
         } else if (zone.offsetHeight + lore_zone.offsetHeight <= max_ligne && bool_augmented_text_area) {
             const img = document.getElementById("card-background");
@@ -497,10 +514,19 @@ function updateEffect(text) {
             if(document.getElementById("card-type").value === "permanent") {
                 const name = document.getElementsByClassName("card-name")[0];
                 const type = document.getElementsByClassName("card-type")[0];
+                const infos = document.getElementsByClassName("card-permanent-info")[0];
+                const current_top_info = parseInt(window.getComputedStyle(infos).top);
                 const name_current_top = parseInt(window.getComputedStyle(name).top);
                 const type_current_top = parseInt(window.getComputedStyle(type).top);
-                name.style.top = (name_current_top + 35) + "px";
-                type.style.top = (type_current_top + 35) + "px";
+                if(!bool_bonus) {
+                    name.style.top = (name_current_top + 37) + "px";
+                    type.style.top = (type_current_top + 37) + "px";
+                    infos.style.top = (current_top_info + 43) + "px";
+                } else {
+                    name.style.top = (name_current_top + 39) + "px";
+                    type.style.top = (type_current_top + 39) + "px";
+                    infos.style.top = (current_top_info + 39) + "px";
+                }
             }
         }
     }
@@ -572,6 +598,8 @@ function updateLore(text) {
     }
 }
 
+let did_with_augmented = false;
+
 /* @param text : text a mettre a jour
  * @param img : <img alt="Card frame" src="images/ordis.webp" id="card-background">
  * @ : utilisé pour update le bonus de reserve
@@ -590,16 +618,22 @@ function updateBonus(text, img) {
         let current_top_effect = parseInt(window.getComputedStyle(effect).top);
         effect.style.top = (current_top_effect - 40) + "px";
         if(document.getElementById("card-type").value === "permanent") {
-            let title = document.getElementsByClassName("card-name")[0];
-            let type = document.getElementsByClassName("card-type")[0];
-            let current_top_title = parseInt(window.getComputedStyle(title).top);
-            let current_top_type = parseInt(window.getComputedStyle(type).top);
+            const title = document.getElementsByClassName("card-name")[0];
+            const type = document.getElementsByClassName("card-type")[0];
+            const infos = document.getElementsByClassName("card-permanent-info")[0];
+            const current_top_info = parseInt(window.getComputedStyle(infos).top);
+            const current_top_title = parseInt(window.getComputedStyle(title).top);
+            const current_top_type = parseInt(window.getComputedStyle(type).top);
             if(!bool_augmented_text_area) {
+                infos.style.top = (current_top_info - 43) + "px";
                 title.style.top = (current_top_title - 34) + "px";
                 type.style.top = (current_top_type - 34) + "px";
+                did_with_augmented = false;
             } else {
-                title.style.top = (current_top_title - 39) + "px";
-                type.style.top = (current_top_type - 39) + "px";
+                did_with_augmented = true;
+                infos.style.top = (current_top_info - 38) + "px";
+                title.style.top = (current_top_title - 38) + "px";
+                type.style.top = (current_top_type - 38) + "px";
             }
         }
     } else if(text === "" && bool_bonus) {
@@ -613,16 +647,20 @@ function updateBonus(text, img) {
         let current_top_effect = parseInt(window.getComputedStyle(effect).top);
         effect.style.top = (current_top_effect + 40) + "px";
         if(document.getElementById("card-type").value === "permanent") {
-            let title = document.getElementsByClassName("card-name")[0];
-            let type = document.getElementsByClassName("card-type")[0];
-            let current_top_title = parseInt(window.getComputedStyle(title).top);
-            let current_top_type = parseInt(window.getComputedStyle(type).top);
+            const title = document.getElementsByClassName("card-name")[0];
+            const type = document.getElementsByClassName("card-type")[0];
+            const infos = document.getElementsByClassName("card-permanent-info")[0];
+            const current_top_info = parseInt(window.getComputedStyle(infos).top);
+            const current_top_title = parseInt(window.getComputedStyle(title).top);
+            const current_top_type = parseInt(window.getComputedStyle(type).top);
             if(!bool_augmented_text_area) {
+                infos.style.top = (current_top_info + 43) + "px";
                 title.style.top = (current_top_title + 34) + "px";
                 type.style.top = (current_top_type + 34) + "px";
             } else {
-                title.style.top = (current_top_title + 39) + "px";
-                type.style.top = (current_top_type + 39) + "px";
+                infos.style.top = (current_top_info + 38) + "px";
+                title.style.top = (current_top_title + 38) + "px";
+                type.style.top = (current_top_type + 38) + "px";
             }
         }
     }
