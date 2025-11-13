@@ -412,7 +412,6 @@ function updateFaction(img, faction) {
         }
     }
     current_faction = faction;
-    console.log(document.getElementById("card-type").value);
 
     if(faction === "commun") {
         const coordinates = findCoordonates(7);
@@ -662,14 +661,21 @@ function updateRarity(rarity, img) {
                 coordinates = findCoordonates(current_position - 12);
                 img.style.top = `-${coordinates.column_coordinates}px`;
                 img.style.left = `-${coordinates.row_coordinates}px`;
-            }
+            }                
+            
             if(document.getElementById("card-type").value !== "permanent") {
-                reserve_cost.style.top = "41px";
-                hand_cost.style.top = "18px";
                 name.style.top = "29px"
                 type.style.top = "52px"
+                reserve_cost.style.top = "41px";
+                hand_cost.style.top = "18px";
                 effect.style.color = "#000";
-            } 
+            }  else {
+                reserve_cost.style.top = "39px";
+                hand_cost.style.top = "16px";
+                type.style.top = "312px";
+                name.style.top = "289px";
+                effect.style.color = "#000";
+            }
             if(document.getElementById("card-type").value === "character") {
                 leaf.style.top = "107px";
                 earth.style.top = "140px";
@@ -689,13 +695,20 @@ function updateRarity(rarity, img) {
                 img.style.left = `-${coordinates.row_coordinates}px`;
 
             }
+            
             if(document.getElementById("card-type").value !== "permanent") {    
-                reserve_cost.style.top = "43px";
-                hand_cost.style.top = "19px";
                 name.style.top = "30px"
                 type.style.top = "53px"
+                reserve_cost.style.top = "43px";
+                hand_cost.style.top = "19px";
                 effect.style.color = "#000";
-            } 
+            } else {
+                reserve_cost.style.top = "41px";
+                hand_cost.style.top = "18px";
+                type.style.top = "314px";
+                name.style.top = "291px";
+                effect.style.color = "#000";
+            }
             if(document.getElementById("card-type").value === "character") {
                 leaf.style.top = "108px";
                 earth.style.top = "141px";
@@ -858,7 +871,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     if(e.target.id === "number")
                         return;
                 }
-                console.log(e.target);
                 const textarea = lastFocusedTextarea;
 
                 if(textarea) {
@@ -868,7 +880,6 @@ window.addEventListener("DOMContentLoaded", () => {
                             src_image = e.srcElement.alt || e.srcElement.children[0].alt;
                         else
                             src_image = e.target.value;
-                        console.log(src_image);
                         if(src_image === "infini" || src_image === "discard" || src_image === "orange" || textarea.id !== "card-bonus" || src_image === "x" || src_image === "1" || src_image === "2" || src_image === "3" || src_image === "4" || src_image === "5" || src_image === "6" || src_image === "7" || src_image === "8" || src_image === "9") {
                             const text_to_insert = emojis_reversed[src_image];
 
