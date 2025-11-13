@@ -46,5 +46,6 @@ Function comments
 > ```
 
 ## TODO
-- modify image position / 1
-- add landmarks and reserve slots for heros / 2
+- permanent type / 1
+- modify image position / 2
+- add landmarks and reserve slots for heros / 3
