@@ -4,29 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
 
+    <title>Altered custom cards creator</title>
+
     <meta name="description" content="Create your own altered cards ! Custom it to the end with every possible options then download it">
-    <meta name="keywords" content="Altered, custom cards, card maker, tcg, altered creator">
+    <meta name="keywords" content="Altered, custom cards, card maker, tcg, custom, Altered Creator, altered, altered custom card, card maker, TCG, card builder">
     <meta name="author" content="github/lockaibg">
     <meta name="robots" content="index, follow">
 
-    <title>Altered Custom Cards Creator</title>
-
     <link rel="stylesheet" href="styles.css">
 
-    <link rel="stylesheet" href="https://use.typekit.net/wzf2bom.css">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
     <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="images/favicon.png" sizes="260x260">
-
-
-    <!--script pour mettre a jour le formulaire-->
-    <script src="js/update_form.js"></script>
-    <!--script pour mettre a jour la preview du document-->
-    <script src="js/update_preview.js"></script>
-    <!--import de la bibliotheque pour le telchargement de la carte et srcipt correspondant-->
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="js/save.js"></script>
+    <link rel="icon" type="image/webp" href="/images/favicon.webp" sizes="260x260">
 
     <!-- Données structurées pour le logo -->
     <script type="application/ld+json">
@@ -34,7 +22,7 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "url": "https://altered-custom-card.com",
-      "logo": "https://altered-custom-card.com/images/favicon.png",
+      "logo": "https://altered-custom-card.com/images/favicon.webp",
       "name": "Altered Custom Cards"
     }
     </script>
@@ -128,31 +116,31 @@
         <br/>
         <div class="button-symbole">
           <button type="button" id="button-leaf">
-            <img src="images/leaf_o.png" alt="leaf" width="20" height="20">
+            <img src="images/leaf_o.webp" alt="leaf" width="20" height="20">
           </button>
           <button type="button" id="button-earth">
-            <img src="images/earth_o.png" alt="earth" width="20" height="20">
+            <img src="images/earth_o.webp" alt="earth" width="20" height="20">
           </button>
           <button type="button" id="button-ocean">
-            <img src="images/ocean_o.png" alt="ocean" width="20" height="20">
+            <img src="images/ocean_o.webp" alt="ocean" width="20" height="20">
           </button>
           <button type="button" id="button-discard">
-            <img src="images/discard_o.png" alt="discard" width="20" height="20">
+            <img src="images/discard_o.webp" alt="discard" width="20" height="20">
           </button>
           <button type="button" id="button-arrow">
-            <img src="images/arrow_o.png" alt="arrow" width="20" height="20">
+            <img src="images/arrow_o.webp" alt="arrow" width="20" height="20">
           </button>
           <button type="button" id="button-hand">
-            <img src="images/hand_o.png" alt="hand" width="20" height="20">
+            <img src="images/hand_o.webp" alt="hand" width="20" height="20">
           </button>
           <button type="button" id="button-reserve">
-            <img src="images/reserve2_o.png" alt="reserve" width="20" height="20">
+            <img src="images/reserve2_o.webp" alt="reserve" width="20" height="20">
           </button>
           <button type="button" id="button-tap">
-            <img src="images/tap_o.png" alt="tap" width="20" height="20">
+            <img src="images/tap_o.webp" alt="tap" width="20" height="20">
           </button>
           <button type="button" id="button-infini">
-            <img src="images/infini_o.png" alt="infini" width="20" height="20">
+            <img src="images/infini_o.webp" alt="infini" width="20" height="20">
           </button>
           <div class="number-select">
             <!-- ton vrai select, utilisé par le JS -->
@@ -171,7 +159,7 @@
           </div>
 
           <button type="button" id="button-orange">
-            <img src="images/orange.png" alt="orange" width="20" height="20">
+            <img src="images/orange.webp" alt="orange" width="20" height="20">
           </button>
         </div>
           <br/>
@@ -196,7 +184,7 @@
 
     <div id="card-preview">
       <div class="card-illustration">
-        <img alt="Illustration" src="images/test.png" id="preview-illustration" height="520">
+        <img alt="Illustration" src="" id="preview-illustration" height="520">
       </div>
 
       <div class="back-card">
@@ -215,15 +203,15 @@
         <div class="card-hand-cost"><span id="preview-hand-cost">1</span></div>
         <div class="card-reserve-cost"><span id="preview-reserve-cost">1</span></div>
         <div class="card-leaf">
-          <div class="fond-stat" id="leaf"><img src="images/leaf_small.png" alt="leaf background" height="31" id="leaf-background"/></div>
+          <div class="fond-stat" id="leaf"><img src="images/leaf_small.webp" alt="leaf background" height="31" id="leaf-background"/></div>
           <span id="preview-leaf">0</span>
         </div>
         <div class="card-earth">
-          <div class="fond-stat" id="earth"><img src="images/earth_small.png" alt="earth background" height="31" id="earth-background"/></div>
+          <div class="fond-stat" id="earth"><img src="images/earth_small.webp" alt="earth background" height="31" id="earth-background"/></div>
           <span id="preview-earth">0</span>
         </div>
         <div class="card-ocean">
-          <div class="fond-stat" id="ocean"><img src="images/ocean_small.png" alt="ocean background" height="31" id="ocean-background"/></div>
+          <div class="fond-stat" id="ocean"><img src="images/ocean_small.webp" alt="ocean background" height="31" id="ocean-background"/></div>
           <span id="preview-ocean">0</span>
         </div>
         <div class="card-undermark"><span id="preview-undermark">altered-custom-card.com, &copy; 2025 Equinox</span></div>
@@ -234,9 +222,16 @@
     <p>The data presented on this site comes from public sources belonging to Equinox. This site has no official connection with this company.</p>
     <ul>
       <li><img src="https://github.com/favicon.ico" alt="github logo" height="16">&nbsp;<a href="https://github.com/lockaibg/altered-custom-card">GitHub</a></li>
-      <li><img src="images/discord.png" alt="discord logo" height="14">&nbsp;<a href="https://discordapp.com/users/517005573124784141">Discord</a></li>
+      <li><img src="images/discord.webp" alt="discord logo" height="14">&nbsp;<a href="https://discordapp.com/users/517005573124784141">Discord</a></li>
     </ul>
   </footer>
+  <!--script pour mettre a jour le formulaire-->
+  <script src="js/update_form.js"></script>
+  <!--script pour mettre a jour la preview du document-->
+  <script src="js/update_preview.js"></script>
+  <!--import de la bibliotheque pour le telchargement de la carte et srcipt correspondant-->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="js/save.js"></script>
 </body>
 
 </html>

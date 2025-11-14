@@ -98,14 +98,14 @@ function convertWithEmojis(texte, is_bonus) {
             if(texte.substring(i+2, i+3) === '}') {
                 if(orange) {
                     if(!is_bonus)
-                        retour = retour + `<img src="${emojis[key]}_o.png" alt="${key}" class="emoji">`;
+                        retour = retour + `<img src="${emojis[key]}_o.webp" alt="${key}" class="emoji">`;
                     else 
-                        retour = retour + `<img src="${emojis[key]}_or.png" alt="${key}" class="emoji">`;
+                        retour = retour + `<img src="${emojis[key]}_or.webp" alt="${key}" class="emoji">`;
                 }
                 else if(is_bonus || current_rarity === "unique") {
-                    retour = retour + `<img src="${emojis[key]}_b.png" alt="${key}" class="emoji">`;
+                    retour = retour + `<img src="${emojis[key]}_b.webp" alt="${key}" class="emoji">`;
                 } else {
-                    retour = retour + `<img src="${emojis[key]}.png" alt="${key}" class="emoji">`;
+                    retour = retour + `<img src="${emojis[key]}.webp" alt="${key}" class="emoji">`;
                 }
                 i+=2;
                 continue;
@@ -244,7 +244,7 @@ function updateStats(stat, type) {
         document.getElementById("preview-leaf").innerHTML = stat;
         let els = document.getElementsByClassName("fond-stat")
         Array.prototype.forEach.call(els, function(el) {
-            el.innerHTML = `<img src="images/${el.id}_zero.png" alt="${el.id} background" height="35" id="${el.id}-background"/>`;
+            el.innerHTML = `<img src="images/${el.id}_zero.webp" alt="${el.id} background" height="35" id="${el.id}-background"/>`;
         });  
     } else {
         var stat_preview = document.getElementById(`preview-${type}`);
@@ -263,67 +263,67 @@ function updateStats(stat, type) {
         if(earth_stat < ocean_stat && earth_stat < leaf_stat) {
             modified["earth"] = true;
             smaller = true;
-            document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="35" id="earth-background"/>';
+            document.getElementById("earth").innerHTML = '<img src="images/earth_small.webp" alt="earth background" height="35" id="earth-background"/>';
         } else if(ocean_stat < earth_stat && ocean_stat < leaf_stat) {
             modified["ocean"] = true;
             smaller = true;
-            document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="35" id="ocean-background"/>';
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.webp" alt="ocean background" height="35" id="ocean-background"/>';
         } else if(leaf_stat < ocean_stat && leaf_stat < earth_stat) {
             modified["leaf"] = true;
             smaller = true;
-            document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="35" id="leaf-background"/>';
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.webp" alt="leaf background" height="35" id="leaf-background"/>';
         }
         //un plus grand
         if(smaller) {
             if(earth_stat > ocean_stat && earth_stat > leaf_stat) {
                 modified["earth"] = true;
-                document.getElementById("earth").innerHTML = '<img src="images/earth_large_o.png" alt="earth background" height="35" id="earth-background"/>';
+                document.getElementById("earth").innerHTML = '<img src="images/earth_large_o.webp" alt="earth background" height="35" id="earth-background"/>';
             } else if(ocean_stat > earth_stat && ocean_stat > leaf_stat) {
                 modified["ocean"] = true;
-                document.getElementById("ocean").innerHTML = '<img src="images/ocean_large_o.png" alt="ocean background" height="35" id="ocean-background"/>';
+                document.getElementById("ocean").innerHTML = '<img src="images/ocean_large_o.webp" alt="ocean background" height="35" id="ocean-background"/>';
             } else if(leaf_stat > ocean_stat && leaf_stat > earth_stat) {
                 modified["leaf"] = true;
-                document.getElementById("leaf").innerHTML = '<img src="images/leaf_large_o.png" alt="leaf background" height="35" id="leaf-background"/>';
+                document.getElementById("leaf").innerHTML = '<img src="images/leaf_large_o.webp" alt="leaf background" height="35" id="leaf-background"/>';
             }
         } else {
             if(earth_stat > ocean_stat && earth_stat > leaf_stat) {
                 modified["ocean"] = true;
                 modified["leaf"] = true;
-                document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="35" id="leaf-background"/>';
-                document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="35" id="ocean-background"/>';
+                document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.webp" alt="leaf background" height="35" id="leaf-background"/>';
+                document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.webp" alt="ocean background" height="35" id="ocean-background"/>';
             } else if(ocean_stat > earth_stat && ocean_stat > leaf_stat) {
                 modified["earth"] = true;
                 modified["leaf"] = true;
-                document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.png" alt="leaf background" height="35" id="leaf-background"/>';
-                document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="35" id="earth-background"/>';
+                document.getElementById("leaf").innerHTML = '<img src="images/leaf_small.webp" alt="leaf background" height="35" id="leaf-background"/>';
+                document.getElementById("earth").innerHTML = '<img src="images/earth_small.webp" alt="earth background" height="35" id="earth-background"/>';
             } else if(leaf_stat > ocean_stat && leaf_stat > earth_stat) {
                 modified["ocean"] = true;
                 modified["earth"] = true;
-                document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.png" alt="ocean background" height="35" id="ocean-background"/>';
-                document.getElementById("earth").innerHTML = '<img src="images/earth_small.png" alt="earth background" height="35" id="earth-background"/>';
+                document.getElementById("ocean").innerHTML = '<img src="images/ocean_small.webp" alt="ocean background" height="35" id="ocean-background"/>';
+                document.getElementById("earth").innerHTML = '<img src="images/earth_small.webp" alt="earth background" height="35" id="earth-background"/>';
             }
         }
         
         
         if(earth_stat === 0) {
             modified["earth"] = true;
-            document.getElementById("earth").innerHTML = '<img src="images/earth_zero.png" alt="earth background" height="35" id="earth-background"/>';
+            document.getElementById("earth").innerHTML = '<img src="images/earth_zero.webp" alt="earth background" height="35" id="earth-background"/>';
         }
         if(leaf_stat === 0) {
             modified["leaf"] = true;
-            document.getElementById("leaf").innerHTML = '<img src="images/leaf_zero.png" alt="leaf background" height="35" id="leaf-background"/>';
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_zero.webp" alt="leaf background" height="35" id="leaf-background"/>';
         }
         if(ocean_stat === 0) {
             modified["ocean"] = true;
-            document.getElementById("ocean").innerHTML = '<img src="images/ocean_zero.png" alt="ocean background" height="35" id="ocean-background"/>';
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_zero.webp" alt="ocean background" height="35" id="ocean-background"/>';
         }
         //si aucune des conditions précédentes
         if(!modified["earth"])
-            document.getElementById("earth").innerHTML = '<img src="images/earth_normal.png" alt="earth background" height="35" id="earth-background"/>';
+            document.getElementById("earth").innerHTML = '<img src="images/earth_normal.webp" alt="earth background" height="35" id="earth-background"/>';
         if(!modified["leaf"])
-            document.getElementById("leaf").innerHTML = '<img src="images/leaf_normal.png" alt="leaf background" height="35" id="leaf-background"/>';
+            document.getElementById("leaf").innerHTML = '<img src="images/leaf_normal.webp" alt="leaf background" height="35" id="leaf-background"/>';
         if(!modified["ocean"])
-            document.getElementById("ocean").innerHTML = '<img src="images/ocean_normal.png" alt="ocean background" height="35" id="ocean-background"/>';
+            document.getElementById("ocean").innerHTML = '<img src="images/ocean_normal.webp" alt="ocean background" height="35" id="ocean-background"/>';
 
     }
 }

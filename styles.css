@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Jali Greek";
+  src: url("/fonts/Jali_Greek.woff2") format("woff2");
+  font-display: swap;
+}
+
+
 body {
     min-height: 100dvh;     
     display: flex;                    
