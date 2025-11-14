@@ -135,7 +135,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
             else if(type_perma === "expedition") {
                 infos.innerHTML = "(Jouez-moi dans l'une de vos Expéditions. Si mon Expédition avance, je vais en Réserve au Repos.)";
-                document.getElementsByClassName("card-permanent-info")[0].style.top = "365px";
+                document.getElementsByClassName("card-permanent-info")[0].style.top = "368px";
                 coordinates = findCoordonates(permanent_expe);
             }
             const img = document.getElementById("card-background");
@@ -180,7 +180,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 else if(type_perma === "expedition") {
                     infos.innerHTML = "(Jouez-moi dans l'une de vos Expéditions. Si mon Expédition avance, je vais en Réserve au Repos.)";
-                    document.getElementsByClassName("card-permanent-info")[0].style.top = "364px";
+                    document.getElementsByClassName("card-permanent-info")[0].style.top = "368px";
                     coordinates = findCoordonates(permanent_expe);
                 }
                 const img = document.getElementById("card-background");

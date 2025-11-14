@@ -31,6 +31,7 @@
 <body>
   <header>
     <p>Je travaille encore sur ce site, mais vous pouvez déjà créer presque tout ce que vous voulez.</p>
+    <a href="../">Version anglaise&nbsp;:&nbsp;<img src="../images/english.webp" alt="english flag" height="16"></a>
   </header>
   <h1>Altered Custom Cards</h1>
   <main>

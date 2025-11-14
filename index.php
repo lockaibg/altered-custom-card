@@ -31,6 +31,7 @@
 <body>
   <header>
     <p>I'm still working on this website, you can already create almost everything you want.</p>
+    <a href="/fr/">French version&nbsp;:&nbsp;<img src="/images/french.webp" alt="french flag" height="16"></a>
   </header>
   <h1>Altered Custom Cards</h1>
   <main>
