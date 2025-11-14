@@ -1,7 +1,7 @@
 const permanent_expe = 32;
 
 /* @param type : type de carte
- * @ : si hero ou token suprimer les cout de main et reserve, ainsi que l'effet bonus
+ * @ : si hero ou token supprimer les coûts de main et réserve, ainsi que l'effet bonus
  * @return : void
 */
 function updateHeroToken(type) {
@@ -10,9 +10,9 @@ function updateHeroToken(type) {
         document.getElementById("reserve-cost-div").innerHTML = "";
         document.getElementById("card-bonus-div").innerHTML = "";
     } else if (document.getElementById("hand-cost-div").innerHTML === ""){
-        document.getElementById("hand-cost-div").innerHTML = '<label for="hand-cost">Hand cost :</label><input type="number" id="hand-cost" name="hand-cost" min="0" value="0" max="10"/>';
-        document.getElementById("reserve-cost-div").innerHTML = '<label for="reserve-cost">Reserve cost :</label><input type="number" id="reserve-cost" name="reserve-cost" min="0" value="0" max="10"/>';
-        document.getElementById("card-bonus-div").innerHTML = '<textarea id="card-bonus" name="card-bonus" placeholder="Reserve effect"></textarea>';
+        document.getElementById("hand-cost-div").innerHTML = '<label for="hand-cost">Coût de main&nbsp;:</label><input type="number" id="hand-cost" name="hand-cost" min="0" value="0" max="10"/>';
+        document.getElementById("reserve-cost-div").innerHTML = '<label for="reserve-cost">Coût de réserve&nbsp;:</label><input type="number" id="reserve-cost" name="reserve-cost" min="0" value="0" max="10"/>';
+        document.getElementById("card-bonus-div").innerHTML = '<textarea id="card-bonus" name="card-bonus" placeholder="Effet de réserve"></textarea>';
         if(document.getElementById("hand-cost")) {
             document.getElementById("hand-cost").addEventListener("change", (e) => {
                 const nb_value = e.target.value;
@@ -67,7 +67,7 @@ function addEventStats(container) {
 }
 
 /* @param container : document.getElementById("additional-type");
- * @ : ajouter l'event listener sur le type du token si il existe
+ * @ : ajouter l'event listener sur le type du token s'il existe
  * @return : void
 */
 function addEventToken(container) {
@@ -117,24 +117,24 @@ function updateRarityForm(type) {
 window.addEventListener("DOMContentLoaded", () => {
     let type = document.getElementById("card-type").value;
     const container = document.getElementById("additional-type");
-    //supprimer les éléments pour hero et token
+    // supprimer les éléments pour hero et token
     updateHeroToken(type);
     updateRarityForm(type);
   
     if(type === "permanent") {
         const add = document.getElementsByClassName("additional-permanent")[0];
-        add.innerHTML = '<select id="permanent-type" name="permanent-type"><option value="landmark">Landmarks</option><option value="expedition">Expedition</option></select>';
+        add.innerHTML = '<select id="permanent-type" name="permanent-type"><option value="landmark">Repère</option><option value="expedition">Expédition</option></select>';
         add.addEventListener("change", (e) => {
             const type_perma = e.target.value;
             const infos = document.getElementById("preview-permanent-info");
-            let coordinates
+            let coordinates;
             if(type_perma === "landmark") {
-                infos.innerHTML = "(Play me  in your Landmarks.  I can't gain Fleeting.)";
+                infos.innerHTML = "(Jouez-moi dans vos Repère. Je ne peux pas gagner Fugace.)";
                 document.getElementsByClassName("card-permanent-info")[0].style.top = "372px";
                 coordinates = findCoordonates(permanent);
             }
             else if(type_perma === "expedition") {
-                infos.innerHTML = "(Play me  in one of your Expeditions. If my Expedition moves forward, I go to Reserve during Rest.)";
+                infos.innerHTML = "(Jouez-moi dans l'une de vos Expéditions. Si mon Expédition avance, je vais en Réserve au Repos.)";
                 document.getElementsByClassName("card-permanent-info")[0].style.top = "365px";
                 coordinates = findCoordonates(permanent_expe);
             }
@@ -148,39 +148,39 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementsByClassName("additional-permanent")[0].innerHTML = "";
     }
 
-    //vérification du type sélectionné au load de la page
+    // vérification du type sélectionné au load de la page
     fetch(`update.php?type=${type}`)
         .then(response => response.text())
         .then(html => {
             container.innerHTML = html;
 
-            //si on a des stats on ajoute un listener sur ces dernières
+            // si on a des stats on ajoute un listener sur ces dernières
             addEventStats(container);
             
-            //si on a sélectionné un token on ajoute aussi un listener sur le type du token
+            // si on a sélectionné un token on ajoute aussi un listener sur le type du token
             addEventToken(container);
         });
     
-    //quand card-type est modifié on ajoute ou supprime le php correspondant au type sélectionné
+    // quand card-type est modifié on ajoute ou supprime le php correspondant au type sélectionné
     document.getElementById("card-type").addEventListener("change", (e) => {
         
         type = e.target.value;
 
         if(type === "permanent") {
             const add = document.getElementsByClassName("additional-permanent")[0];
-            add.innerHTML = '<select id="permanent-type" name="permanent-type"><option value="landmark">Landmarks</option><option value="expedition">Expedition</option></select>';
+            add.innerHTML = '<select id="permanent-type" name="permanent-type"><option value="landmark">Repère</option><option value="expedition">Expédition</option></select>';
             add.addEventListener("change", (e) => {
                 const type_perma = e.target.value;
                 const infos = document.getElementById("preview-permanent-info");
-                let coordinates
+                let coordinates;
                 if(type_perma === "landmark") {
-                    infos.innerHTML = "(Play me  in your Landmarks.  I can't gain Fleeting.)";
+                    infos.innerHTML = "(Jouez-moi dans vos Repère. Je ne peux pas gagner Fugace.)";
                     document.getElementsByClassName("card-permanent-info")[0].style.top = "372px";
                     coordinates = findCoordonates(permanent);
                 }
                 else if(type_perma === "expedition") {
-                    infos.innerHTML = "(Play me  in one of your Expeditions. If my Expedition moves forward, I go to Reserve during Rest.)";
-                    document.getElementsByClassName("card-permanent-info")[0].style.top = "365px";
+                    infos.innerHTML = "(Jouez-moi dans l'une de vos Expéditions. Si mon Expédition avance, je vais en Réserve au Repos.)";
+                    document.getElementsByClassName("card-permanent-info")[0].style.top = "364px";
                     coordinates = findCoordonates(permanent_expe);
                 }
                 const img = document.getElementById("card-background");
@@ -193,20 +193,19 @@ window.addEventListener("DOMContentLoaded", () => {
             document.getElementsByClassName("additional-permanent")[0].innerHTML = "";
         }
         
-        //supprimer les éléments pour hero
+        // supprimer les éléments pour hero
         updateHeroToken(type);
         updateRarityForm(type);
-
 
         fetch(`update.php?type=${type}`)
             .then(response => response.text())
             .then(html => {
                 container.innerHTML = html;
 
-                //si on a sélectionné un token on ajoute aussi un listener sur le type du token
+                // si on a sélectionné un token on ajoute aussi un listener sur le type du token
                 addEventToken(container);
 
-                //si on a des stats on ajoute un listener sur ces dernières
+                // si on a des stats on ajoute un listener sur ces dernières
                 addEventStats(container);
             });
     });
